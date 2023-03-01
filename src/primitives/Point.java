@@ -6,7 +6,7 @@ import javax.swing.*;
 import static java.lang.Math.sqrt;
 
 public class Point {
-   final Double3 xyz;
+   protected final Double3 xyz;
    public Point(double x, double y, double z){
        xyz=new Double3(x,y,z);
    }
@@ -18,15 +18,15 @@ public class Point {
        return new Vector(this.xyz.subtract(point.xyz));
     }
 
-    Point add(Vector vector){
+   public Point add(Vector vector){
        return new Point(this.xyz.add(vector.xyz));
    }
 
-   double distanceSquared(Point point){
+   public double distanceSquared(Point point){
        return (point.xyz.d1-this.xyz.d1)*(point.xyz.d1-this.xyz.d1)+(point.xyz.d1-this.xyz.d1)*(point.xyz.d1-this.xyz.d1)+(point.xyz.d1-this.xyz.d1)*(point.xyz.d1-this.xyz.d1);
    }
 
-   double distance(Point point){
+   public double distance(Point point){
        return sqrt(distanceSquared(point));
    }
 }
