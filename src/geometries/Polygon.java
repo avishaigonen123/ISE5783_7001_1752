@@ -10,7 +10,7 @@ import primitives.Vector;
 /** Polygon class represents two-dimensional polygon in 3D Cartesian coordinate
  * system
  * @author Dan */
-public class Polygon extends Geometry {
+public class Polygon implements Geometry {
    /** List of polygon's vertices */
    protected final List<Point> vertices;
    /** Associated plane in which the polygon lays */
@@ -62,7 +62,7 @@ public class Polygon extends Geometry {
       // first edge being less than 180 deg. It is hold by the sign of its dot product
       // with
       // the normal. If all the rest consequent edges will generate the same sign -
-      // the
+      // the 
       // polygon is convex ("kamur" in Hebrew).
       boolean positive = edge1.crossProduct(edge2).dotProduct(n) > 0;
       for (var i = 1; i < vertices.length; ++i) {
