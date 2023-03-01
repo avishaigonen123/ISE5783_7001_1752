@@ -9,7 +9,7 @@ public class Vector extends Point{
         if(_xyz.equals(Double3.ZERO))
             throw new IllegalArgumentException("vector is a zero vector!");
     }
-   public Vector(Double3 _xyz){
+   Vector(Double3 _xyz){
         super(_xyz);
         if(_xyz.equals(Double3.ZERO))
             throw new IllegalArgumentException("vector is a zero vector!");
@@ -29,7 +29,7 @@ public class Vector extends Point{
     }
 
   public  Vector crossProduct(Vector vec){
-        return new Vector(this.xyz.d2*vec.xyz.d3-this.xyz.d3*vec.xyz.d2 , this.xyz.d1*vec.xyz.d3-this.xyz.d3*vec.xyz.d1  ,this.xyz.d1*vec.xyz.d2-this.xyz.d2*vec.xyz.d1  );
+        return new Vector(this.xyz.d2*vec.xyz.d3-this.xyz.d3*vec.xyz.d2 , this.xyz.d3*vec.xyz.d1-this.xyz.d1*vec.xyz.d3  ,this.xyz.d1*vec.xyz.d2-this.xyz.d2*vec.xyz.d1  );
     }
 
    public double lengthSquared(){
@@ -44,5 +44,11 @@ public class Vector extends Point{
         return scale(1/ length() );
     }
 
-
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj instanceof Vector other)
+            return super.equals(obj);
+        return false;
+    }
 }

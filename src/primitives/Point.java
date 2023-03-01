@@ -1,7 +1,6 @@
 package primitives;
 
 
-import javax.swing.*;
 
 import static java.lang.Math.sqrt;
 
@@ -29,4 +28,11 @@ public class Point {
    public double distance(Point point){
        return sqrt(distanceSquared(point));
    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj instanceof Point other)
+            return this.xyz.equals(other.xyz);
+        return false;
+    }
 }
