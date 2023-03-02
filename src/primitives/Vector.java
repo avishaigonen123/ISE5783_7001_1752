@@ -13,6 +13,10 @@ public class Vector extends Point {
             throw new IllegalArgumentException("vector is a zero vector!");
     }
 
+    /**
+     * constructor that gets double3 and initalize it
+     * @param _xyz the double3 we get
+     */
     Vector(Double3 _xyz) {
         super(_xyz);
         if (_xyz.equals(Double3.ZERO))
