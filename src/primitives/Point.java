@@ -12,6 +12,12 @@ public class Point {
      */
     final Double3 xyz;
 
+    /**
+     * constructor that initialize the point with 3 coordinates
+     * @param x coordinate 1
+     * @param y coordinate 2
+     * @param z coordinate 3
+     */
     public Point(double x, double y, double z) {
         xyz = new Double3(x, y, z);
     }
@@ -24,10 +30,20 @@ public class Point {
         xyz = _xyz;
     }
 
+    /**
+     * subtructs this point by that point
+     * @param point that point
+     * @return the vector that starts with that point to this point
+     */
     public Vector subtract(Point point) {
         return new Vector(this.xyz.subtract(point.xyz));
     }
 
+    /**
+     * returns a point that is this point moved by a vector
+     * @param vector the vector to be moved by
+     * @return the end point of the vector
+     */
     public Point add(Vector vector) {
         return new Point(this.xyz.add(vector.xyz));
     }
