@@ -6,6 +6,12 @@ import static java.lang.Math.sqrt;
  * class that represent vector. a primitive object.
  */
 public class Vector extends Point {
+    /**
+     * constructor that gets 3 coordinats
+     * @param x cord 1
+     * @param y cord 2
+     * @param z cord 3
+     */
     public Vector(double x, double y, double z) {
         super(x, y, z);
         Double3 _xyz = new Double3(x, y, z);
@@ -69,7 +75,10 @@ public class Vector extends Point {
         return this.dotProduct(this);
         // V*V == |V|^2
     }
-
+    /**
+     * func that returns the length of our vector
+     * @return our vector length
+     */
     public double length() {
         return sqrt(lengthSquared());
         // sqrt( |V|^2 ) == |V|

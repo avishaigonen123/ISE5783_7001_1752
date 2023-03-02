@@ -4,7 +4,13 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+/**
+ * a class to represent an infinite Tube from a certain point
+ */
 public class Tube extends RadialGeometry {
+    /**
+     * a ray for the axes
+     */
     final protected Ray axisRay;
 
     /**

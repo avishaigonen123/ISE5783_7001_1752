@@ -7,6 +7,11 @@ public class Ray {
     private final Point p0;
     private final Vector dir;
 
+    /**
+     * constructor that gets Point and direction Vector (saved as normalized)
+     * @param p the point to start
+     * @param vec the direction
+     */
     public Ray(Point p, Vector vec) {
         p0 = p;
         dir = vec.normalize();

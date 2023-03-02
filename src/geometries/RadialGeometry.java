@@ -4,6 +4,9 @@ package geometries;
  * abstract class that help us to present all the geometries that has radius
  */
 public abstract class RadialGeometry implements Geometry {
+    /**
+     * the radius of the geometry
+     */
     final protected double radius;
 
     /**
@@ -14,6 +17,10 @@ public abstract class RadialGeometry implements Geometry {
         radius = _radius;
     }
 
+    /**
+     * getter for radius
+     * @return the radius
+     */
     public double getRadius() {
         return radius;
     }
