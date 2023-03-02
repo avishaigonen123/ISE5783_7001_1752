@@ -4,9 +4,17 @@ public class Ray {
     private final Point p0;
     private final Vector dir;
 
-    Ray(Point p, Vector vec){
-        p0=p;
+    public Ray(Point p, Vector vec) {
+        p0 = p;
         dir = vec.normalize();
+    }
+
+    public Point getP0() {
+        return p0;
+    }
+
+    public Vector getDir() {
+        return dir;
     }
 
     @Override
@@ -16,4 +24,6 @@ public class Ray {
             return this.p0.equals(other.p0) && this.dir.equals(other.dir);
         return false;
     }
+    @Override
+    public String toString() { return "point: " + p0.toString() + " vector: " + dir.toString();}
 }

@@ -35,4 +35,7 @@ public class Point {
             return this.xyz.equals(other.xyz);
         return false;
     }
+
+    @Override
+    public String toString() { return xyz.toString(); }
 }

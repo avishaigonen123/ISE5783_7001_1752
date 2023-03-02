@@ -51,4 +51,6 @@ public class Vector extends Point{
             return super.equals(obj);
         return false;
     }
+    @Override
+    public String toString() { return super.toString(); }
 }
