@@ -1,5 +1,8 @@
 package primitives;
 
+/**
+ * class that represents ray. a primitive object.
+ */
 public class Ray {
     private final Point p0;
     private final Vector dir;
@@ -9,10 +12,18 @@ public class Ray {
         dir = vec.normalize();
     }
 
+    /**
+     * getter for p0
+     * @return the field p0
+     */
     public Point getP0() {
         return p0;
     }
 
+    /**
+     * getter for dir
+     * @return the field dir
+     */
     public Vector getDir() {
         return dir;
     }
