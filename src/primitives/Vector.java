@@ -22,6 +22,7 @@ public class Vector extends Point {
     /**
      * constructor that gets double3 and initalize it
      * @param _xyz the double3 we get
+     * @throws IllegalArgumentException if the vector is a zero vector
      */
     Vector(Double3 _xyz) {
         super(_xyz);

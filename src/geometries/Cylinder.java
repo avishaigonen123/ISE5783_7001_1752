@@ -12,9 +12,10 @@ public class Cylinder extends Tube {
 
     /**
      * constructor that initialize the cylinder object
-     * @param _radius the radius
+     *
+     * @param _radius  the radius
      * @param _axisRay the axisRay
-     * @param _height the height
+     * @param _height  the height
      */
     Cylinder(double _radius, Ray _axisRay, double _height) {
         super(_radius, _axisRay);
@@ -23,6 +24,7 @@ public class Cylinder extends Tube {
 
     /**
      * getter for height
+     *
      * @return the height
      */
     public double getHeight() {
@@ -33,8 +35,10 @@ public class Cylinder extends Tube {
     public Vector getNormal(Point p) {
         Point p0 = this.axisRay.getP0();
         Vector v = this.axisRay.getDir();
-        double t = v.dotProduct(p.subtract(p0));
-        if(t == this.height) // if the point is on base B return the dir
+        double t=0;
+        if (!p.equals(p0))
+            t = v.dotProduct(p.subtract(p0));
+        if (t == this.height) // if the point is on base B return the dir
             return v;
         else if (t == 0) // if the point is on base A return the opposite of dir
             return v.scale(-1);

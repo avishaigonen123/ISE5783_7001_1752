@@ -51,7 +51,7 @@ public class VectorTest {
     }
     /** Test method for {@link primitives.Vector#dotProduct(Vector)}. */
     @Test
-    void testDotProduct() {        fail("Not yet implemented");
+    void testDotProduct() {
         Vector v1 = new Vector(1, 2, 3);
         // ============ Equivalence Partitions Tests ==============
 
