@@ -19,12 +19,12 @@ public class VectorTest {
         // TC01: Test that checks add func with angle that is smaller then 90
         Vector v2 = new Vector(0, 3, 0);
         Vector vr = new Vector(1,5,3);
-        assertEquals(v1.add(v2), vr, "add() wrong result in less then 90 degrees");
+        assertEquals( vr,v1.add(v2), "add() wrong result in less then 90 degrees");
 
         // TC02: Test that checks add func with angle that is smaller then 90
         v2 = new Vector(0,3,-7);
         vr = new Vector(1,5,-4);
-        assertEquals(v1.add(v2), vr, "add() wrong result in more then 90 degrees");
+        assertEquals( vr,v1.add(v2), "add() wrong result in more then 90 degrees");
 
         // =============== Boundary Values Tests ==================
         // TC11: test zero vector from add on contrary vectors
@@ -42,7 +42,7 @@ public class VectorTest {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Test that checks scale with anything that isn't 0
         Vector vr = new Vector(2, 4, 6);
-        assertEquals(v1.scale(t), vr, "scale() wrong result in no 0");
+        assertEquals(vr, v1.scale(t), "scale() wrong result in no 0");
 
         // =============== Boundary Values Tests ==================
         // TC11: test that checks scale with 0
@@ -58,18 +58,18 @@ public class VectorTest {
         // TC01: Test that checks add func with angle that is smaller then 90
         Vector v2 = new Vector(0, 3, 0);
         double rs = 6;
-        assertEquals(v1.dotProduct(v2), rs,0.00001, "dotProduct() wrong result in less then 90 degrees");
+        assertEquals(rs, v1.dotProduct(v2),0.00001, "dotProduct() wrong result in less then 90 degrees");
 
         // TC02: Test that checks add func with angle that is smaller then 90
         v2 = new Vector(0,3,-7);
         rs = -15;
-        assertEquals(v1.dotProduct(v2), rs,0.00001, "dotProduct() wrong result in more then 90 degrees");
+        assertEquals(rs, v1.dotProduct(v2),0.00001, "dotProduct() wrong result in more then 90 degrees");
 
         // =============== Boundary Values Tests ==================
         // TC11: test zero vector from dot-product of orthogonal vectors
         v2 = new Vector(0, 3, -2);
         rs = 0;
-        assertEquals(v1.dotProduct(v2), rs, 0.00001, "dotProduct() wrong result in orthogonal vectors");
+        assertEquals( rs, v1.dotProduct(v2),0.00001, "dotProduct() wrong result in orthogonal vectors");
     }
 
     /**
@@ -101,7 +101,7 @@ public class VectorTest {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Test that checks lengthSquared with anything
         double d = 25;
-        assertEquals(v1.lengthSquared(), d,0.000001, "lengthSquared() wrong result!");
+        assertEquals(d, v1.lengthSquared(),0.000001, "lengthSquared() wrong result!");
 
         // =============== Boundary Values Tests ==================
         // none
@@ -114,7 +114,7 @@ public class VectorTest {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Test that checks length with anything
         double d = 5;
-        assertEquals(v1.length(), d,0.000001, "length() wrong result!");
+        assertEquals(d, v1.length(),0.000001, "length() wrong result!");
 
         // =============== Boundary Values Tests ==================
         // none
@@ -127,7 +127,7 @@ public class VectorTest {
         Vector vr = new Vector(0,0,1);
         // ============ Equivalence Partitions Tests ==============
         // TC01: Test that checks normalized for everyone!
-        assertEquals(v1.normalize(), vr, "normalize() wrong result!");
+        assertEquals(vr, v1.normalize(), "normalize() wrong result!");
 
         // =============== Boundary Values Tests ==================
         // none
