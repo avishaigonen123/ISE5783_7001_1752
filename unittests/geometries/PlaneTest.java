@@ -25,7 +25,7 @@ public class PlaneTest {
         Vector vr = new Vector(1,0,0);
         Point p0 = new Point(0,0,0);
         Vector norm = plane.getNormal(p0);
-        assertEquals(norm.length(), 1,0.000001,"getNormal() result length isn't equals to 1!" );
+        assertEquals(1, norm.length(),0.000001,"getNormal() result length isn't equals to 1!" );
         assertThrows(IllegalArgumentException.class, () -> norm.crossProduct(vr),
                 "crossProduct() vectors that are not on the same line does not throw an exception");
 

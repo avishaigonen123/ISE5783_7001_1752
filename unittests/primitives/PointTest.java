@@ -19,7 +19,7 @@ public class PointTest {
         // TC01: Test that checks subtraction between points that are not the same
         Point p2 = new Point(0,0,0);
         Vector vr = new Vector(0,0,5);
-        assertEquals(p1.subtract(p2), vr, "subtract() wrong result in points that are not the same");
+        assertEquals(vr,p1.subtract(p2), "subtract() wrong result in points that are not the same");
 
         // =============== Boundary Values Tests ==================
         // TC11: Test that checks subtraction between points that are the same
@@ -36,7 +36,7 @@ public class PointTest {
         // TC01: Test that checks add with anything
         Vector v1 = new Vector(1,0,0);
         Point pr = new Point(1,0,5);
-        assertEquals(p1.add(v1),pr, "add() wrong result!");
+        assertEquals(pr,p1.add(v1), "add() wrong result!");
 
         // =============== Boundary Values Tests ==================
         // none
@@ -51,7 +51,7 @@ public class PointTest {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Test that checks distanceSquared with anything
         double d = 25;
-        assertEquals(p1.distanceSquared(p2), d,0.000001, "distanceSquared() wrong result!");
+        assertEquals(d,p1.distanceSquared(p2),0.000001, "distanceSquared() wrong result!");
 
         // =============== Boundary Values Tests ==================
         // none
@@ -65,7 +65,7 @@ public class PointTest {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Test that checks distance with anything
         double d = 5;
-        assertEquals(p1.distance(p2), d,0.000001, "distance() wrong result!");
+        assertEquals(d,p1.distance(p2),0.000001, "distance() wrong result!");
 
         // =============== Boundary Values Tests ==================
         // none

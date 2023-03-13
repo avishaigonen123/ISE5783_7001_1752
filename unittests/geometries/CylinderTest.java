@@ -27,8 +27,8 @@ public class CylinderTest {
         Point p0 = new Point(1, 2, 3);
         Vector vr = new Vector(0, 0, 1);
         Vector norm = cylinder.getNormal(p0);
-        assertEquals(norm.length(), 1, 0.000001, "getNormal() result length isn't equals to 1!");
-        assertEquals(norm, vr, "getNormal() result is wrong!");
+        assertEquals(1, norm.length(), 0.000001, "getNormal() result length isn't equals to 1!");
+        assertEquals(vr, norm, "getNormal() result is wrong!");
         // assertThrows(IllegalArgumentException.class, () -> norm.crossProduct(vr),
         //        "crossProduct() vectors that are not on the same line does not throw an exception");
 
@@ -36,29 +36,29 @@ public class CylinderTest {
         Point p1 = new Point(1, 1, 2);
         vr = new Vector(0, -1, 0);
         norm = cylinder.getNormal(p1);
-        assertEquals(norm.length(), 1, 0.000001, "getNormal() result length isn't equals to 1!");
-        assertEquals(norm, vr, "getNormal() result is wrong!");
+        assertEquals(1, norm.length(), 0.000001, "getNormal() result length isn't equals to 1!");
+        assertEquals(vr,norm, "getNormal() result is wrong!");
 
         // TC03: Test that checks getNormal func for a state where the vector from center to p0 isn't orthogonal to dir, and on base B (without the center).
         Point p2 = new Point(1, 5, 0);
         vr = new Vector(0, 1, 0);
         norm = cylinder.getNormal(p2);
-        assertEquals(norm.length(), 1, 0.000001, "getNormal() result length isn't equals to 1!");
-        assertEquals(norm, vr, "getNormal() result is wrong!");
+        assertEquals(1, norm.length(), 0.000001, "getNormal() result length isn't equals to 1!");
+        assertEquals(vr,norm, "getNormal() result is wrong!");
 
         // =============== Boundary Values Tests ==================
         // TC11: Test that checks getNormal func for a state where the point is in the middle of base A (with the center)
         p1 = new Point(1,1,1);
         vr = new Vector(0, -1, 0);
         norm = cylinder.getNormal(p1);
-        assertEquals(norm.length(), 1, 0.000001, "getNormal() result length isn't equals to 1!");
-        assertEquals(norm, vr, "getNormal() result is wrong!");
+        assertEquals(1, norm.length(), 0.000001, "getNormal() result length isn't equals to 1!");
+        assertEquals(vr,norm, "getNormal() result is wrong!");
 
         // TC12: Test that checks getNormal func for a state where the point is in the middle of base B (without the center).
         p2 = new Point(1, 5, 1);
         vr = new Vector(0, 1, 0);
         norm = cylinder.getNormal(p2);
-        assertEquals(norm.length(), 1, 0.000001, "getNormal() result length isn't equals to 1!");
-        assertEquals(norm, vr, "getNormal() result is wrong!");
+        assertEquals(1, norm.length(), 0.000001, "getNormal() result length isn't equals to 1!");
+        assertEquals(vr, norm, "getNormal() result is wrong!");
     }
 }

@@ -24,8 +24,8 @@ public class SphereTest {
         Point p0 = new Point(1,1,3);
         Vector vr = new Vector(0,0,1);
         Vector norm = sphere.getNormal(p0);
-        assertEquals(norm.length(), 1,0.000001,"getNormal() result length isn't equals to 1!" );
-        assertEquals(norm, vr,"getNormal() result is wrong!" );
+        assertEquals(1, norm.length(),0.000001,"getNormal() result length isn't equals to 1!" );
+        assertEquals(vr,norm,"getNormal() result is wrong!" );
         // assertThrows(IllegalArgumentException.class, () -> norm.crossProduct(vr),
         //        "crossProduct() vectors that are not on the same line does not throw an exception");
 
