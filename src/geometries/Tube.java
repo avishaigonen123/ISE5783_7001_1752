@@ -15,6 +15,7 @@ public class Tube extends RadialGeometry {
 
     /**
      * getter for axis ray
+     *
      * @return the axisRay
      */
     public Ray getAxisRay() {
@@ -23,7 +24,8 @@ public class Tube extends RadialGeometry {
 
     /**
      * a constructor for tube
-     * @param _radius the radius
+     *
+     * @param _radius  the radius
      * @param _axisRay the axisRay
      */
     Tube(double _radius, Ray _axisRay) {
@@ -33,6 +35,11 @@ public class Tube extends RadialGeometry {
 
     @Override
     public Vector getNormal(Point p) {
-        return null;
+        Point p0 = this.axisRay.getP0();
+        Vector v = this.axisRay.getDir();
+        double t = v.dotProduct(p.subtract(p0));
+        Point o = p0.add(v.scale(t));
+        v = p.subtract(o);
+        return v.normalize();
     }
-    }
+}
