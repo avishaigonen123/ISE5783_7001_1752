@@ -1,20 +1,19 @@
 package geometries;
 
 import org.junit.jupiter.api.Test;
+import primitives.Point;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PlaneTest {
+/**
+ * Testing Plane
+ * @author Avishai Gonen
+ */
+public class PlaneTest {
 
+    /** Test method for {@link Plane#getNormal(Point)}. */
     @Test
-    void getNormal() {
-    }
+    void testGetNormal() {        fail("Not yet implemented");
 
-    @Test
-    void getP0() {
     }
-
-    @Test
-    void testGetNormal() {
-    }
-}
+ }

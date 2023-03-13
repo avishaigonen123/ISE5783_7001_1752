@@ -1,16 +1,19 @@
 package geometries;
 
 import org.junit.jupiter.api.Test;
+import primitives.Point;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CylinderTest {
+/**
+ * Testing Cylinder
+ * @author Avishai Gonen
+ */
+public class CylinderTest {
 
+    /** Test method for {@link Cylinder#getNormal(Point)}. */
     @Test
-    void getHeight() {
-    }
+    void testGetNormal() {        fail("Not yet implemented");
 
-    @Test
-    void getNormal() {
     }
 }

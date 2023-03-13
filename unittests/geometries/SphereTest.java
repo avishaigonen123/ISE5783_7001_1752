@@ -1,16 +1,20 @@
 package geometries;
 
 import org.junit.jupiter.api.Test;
+import primitives.Point;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SphereTest {
+/**
+ * Testing Sphere
+ * @author Avishai Gonen
+ */
+public class SphereTest {
 
-    @Test
-    void getCenter() {
-    }
 
+    /** Test method for {@link Sphere#getNormal(Point)}. */
     @Test
-    void getNormal() {
+    void testGetNormal() {        fail("Not yet implemented");
+
     }
 }

@@ -4,22 +4,33 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PointTest {
+/**
+ * Testing Point
+ * @author Avishai Gonen
+ */
+public class PointTest {
 
+     /** Test method for {@link primitives.Point#subtract(Point)}. */
     @Test
-    void subtract() {
-
+    void testSubtract() {
+        fail("Not yet implemented");
     }
 
+    /** Test method for {@link primitives.Point#add(Vector)}}. */
     @Test
-    void add() {
+    void testAdd() {
+        fail("Not yet implemented");
     }
+    /** Test method for {@link primitives.Point#distanceSquared(Point)}}. */
 
     @Test
-    void distanceSquared() {
+    void testDistanceSquared() {
+        fail("Not yet implemented");
     }
+    /** Test method for {@link primitives.Point#distance(Point)}}. */
 
     @Test
-    void distance() {
+    void testDistance() {
+        fail("Not yet implemented");
     }
 }
