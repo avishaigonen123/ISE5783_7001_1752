@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Testing Cylinder
- * @author Avishai Gonen
+ * @author Ariel Zaken && Avishai Gonen
  */
 public class CylinderTest {
 

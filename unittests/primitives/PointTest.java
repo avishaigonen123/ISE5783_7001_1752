@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Testing Point
- * @author Avishai Gonen
+ * @author Ariel Zaken && Avishai Gonen
  */
 public class PointTest {
 

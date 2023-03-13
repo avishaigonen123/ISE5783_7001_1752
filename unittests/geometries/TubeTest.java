@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Testing Tube
- * @author Avishai Gonen
+ * @author Ariel Zaken && Avishai Gonen
  */
 public class TubeTest {
 

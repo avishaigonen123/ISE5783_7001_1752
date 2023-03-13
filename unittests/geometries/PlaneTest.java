@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Testing Plane
- * @author Avishai Gonen
+ * @author Ariel Zaken && Avishai Gonen
  */
 public class PlaneTest {
 

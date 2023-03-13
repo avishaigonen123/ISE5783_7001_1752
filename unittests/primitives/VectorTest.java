@@ -7,7 +7,7 @@ import static primitives.Util.isZero;
 
 /**
  * Testing Vector
- * @author Avishai Gonen
+ * @author Ariel Zaken && Avishai Gonen
  */
 public class VectorTest {
     /** Test method for {@link primitives.Vector#add(Vector)}. */
