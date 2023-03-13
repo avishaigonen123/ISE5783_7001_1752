@@ -7,24 +7,25 @@ import primitives.Vector;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Testing Plane
+ * Testing Triangle
  * @author Ariel Zaken && Avishai Gonen
  */
-public class PlaneTest {
+public class TriangleTest {
 
-    /** Test method for {@link Plane#getNormal(Point)}. */
+
+    /** Test method for {@link Triangle#getNormal(Point)}. */
     @Test
     void testGetNormal() {
-        Plane plane = new Plane(
+        Triangle triangle = new Triangle(
                 new Point(0,0,0),
                 new Point(0,1,0),
                 new Point(0,0,1)
         );
         // ============ Equivalence Partitions Tests ==============
-        // TC01: Test that checks getNormal func for every case in plane
+        // TC01: Test that checks getNormal func for every case in triangle
         Vector vr = new Vector(1,0,0);
         Point p0 = new Point(0,0,0);
-        Vector norm = plane.getNormal(p0);
+        Vector norm = triangle.getNormal(p0);
         assertEquals(norm.length(), 1,0.000001,"getNormal() result length isn't equals to 1!" );
         assertThrows(IllegalArgumentException.class, () -> norm.crossProduct(vr),
                 "crossProduct() vectors that are not on the same line does not throw an exception");
@@ -32,4 +33,4 @@ public class PlaneTest {
         // =============== Boundary Values Tests ==================
         // none
     }
- }
+}
