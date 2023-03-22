@@ -4,6 +4,8 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
+
 /**
  * a class to represent an infinite Tube from a certain point
  */
@@ -43,5 +45,16 @@ public class Tube extends RadialGeometry {
             o = p0.add(v.scale(t));
         v = p.subtract(o);
         return v.normalize();
+    }
+
+    /**
+     * function that returns list of intersections with the geometry and the given ray
+     *
+     * @param ray the ray we want to intersect with
+     * @return the list of the intersections
+     */
+    @Override
+    public List<Point> findIntersections(Ray ray) {
+        return null;
     }
 }

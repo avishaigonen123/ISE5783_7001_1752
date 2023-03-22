@@ -2,6 +2,7 @@ package geometries;
 
 import org.junit.jupiter.api.Test;
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,5 +32,17 @@ public class PlaneTest {
 
         // =============== Boundary Values Tests ==================
         // none
+    }
+
+    /**
+     * Test method for {@link Plane#findIntersections(Ray)}
+     */
+    @Test
+    void testFindIntersections(){
+        // ============ Equivalence Partitions Tests ==============
+        // TC01
+
+        // =============== Boundary Values Tests ==================
+        // TC11:
     }
  }

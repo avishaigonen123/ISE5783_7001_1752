@@ -61,4 +61,16 @@ public class CylinderTest {
         assertEquals(1, norm.length(), 0.000001, "getNormal() result length isn't equals to 1!");
         assertEquals(vr, norm, "getNormal() result is wrong!");
     }
+
+    /**
+     * Test method for {@link Cylinder#findIntersections(Ray)}
+     */
+    @Test
+    void testFindIntersections(){
+        // ============ Equivalence Partitions Tests ==============
+        // TC01
+
+        // =============== Boundary Values Tests ==================
+        // TC11:
+    }
 }

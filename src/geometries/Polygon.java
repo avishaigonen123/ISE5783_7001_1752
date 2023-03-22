@@ -5,6 +5,7 @@ import static primitives.Util.isZero;
 import java.util.List;
 
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
 
 /** Polygon class represents two-dimensional polygon in 3D Cartesian coordinate
@@ -79,4 +80,16 @@ public class Polygon implements Geometry {
 
    @Override
    public Vector getNormal(Point point) { return plane.getNormal(); }
+
+
+   /**
+    * function that returns list of intersections with the geometry and the given ray
+    *
+    * @param ray the ray we want to intersect with
+    * @return the list of the intersections
+    */
+   @Override
+   public List<Point> findIntersections(Ray ray) {
+      return null;
+   }
 }

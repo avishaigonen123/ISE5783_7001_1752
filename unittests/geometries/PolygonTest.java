@@ -9,8 +9,8 @@ import static primitives.Util.isZero;
 
 import org.junit.jupiter.api.Test;
 
-import geometries.Polygon;
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
 
 /** Testing Polygons
@@ -83,5 +83,17 @@ public class PolygonTest {
         for (int i = 0; i < 3; ++i)
             assertTrue(isZero(result.dotProduct(pts[i].subtract(pts[i == 0 ? 3 : i - 1]))),
                     "Polygon's normal is not orthogonal to one of the edges");
+    }
+
+    /**
+     * Test method for {@link Polygon#findIntersections(Ray)}
+     */
+    @Test
+    void testFindIntersections(){
+        // ============ Equivalence Partitions Tests ==============
+        // TC01
+
+        // =============== Boundary Values Tests ==================
+        // TC11:
     }
 }

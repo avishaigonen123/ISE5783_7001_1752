@@ -44,4 +44,16 @@ public class TubeTest {
         // assertThrows(IllegalArgumentException.class, () -> norm.crossProduct(vr),
         //        "crossProduct() vectors that are not on the same line does not throw an exception");
     }
+
+    /**
+     * Test method for {@link Tube#findIntersections(Ray)}
+     */
+    @Test
+    void testFindIntersections(){
+        // ============ Equivalence Partitions Tests ==============
+        // TC01
+
+        // =============== Boundary Values Tests ==================
+        // TC11:
+    }
 }

@@ -4,6 +4,8 @@ import primitives.Ray;
 import primitives.Point;
 import primitives.Vector;
 
+import java.util.List;
+
 /**
  * class that represents a cylinder, finite cylinder. this is a geometry object.
  */
@@ -44,5 +46,16 @@ public class Cylinder extends Tube {
             return v.scale(-1);
         else
             return super.getNormal(p);// if the point is not on the bases then return get normal of tube
+    }
+
+    /**
+     * function that returns list of intersections with the geometry and the given ray
+     *
+     * @param ray the ray we want to intersect with
+     * @return the list of the intersections
+     */
+    @Override
+    public List<Point> findIntersections(Ray ray) {
+        return null;
     }
 }

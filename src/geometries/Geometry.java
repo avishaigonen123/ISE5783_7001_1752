@@ -6,7 +6,7 @@ import primitives.Vector;
 /**
  * interface that represents all the geometries objects in our project
  */
-public interface Geometry {
+public interface Geometry extends Intersectable {
    /**
     * a func to be implemented to get the normal in a point
     * assumes that the point is on the surface
