@@ -34,6 +34,32 @@ public class PlaneTest {
         // none
     }
 
+    /** Test method for {@link Plane#Plane(Point,Point,Point)}. */
+    @Test
+    void testConstructor(){
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: Test that checks the constructor without merging points and no points on the same line
+        try {
+            new Plane(
+                    new Point(0, 0, 0),
+                    new Point(0, 1, 0),
+                    new Point(0, 0, 1)
+            );
+        }
+        catch (IllegalArgumentException e){
+            fail("Failed constructing a correct Plain in constructor TC01");
+        }
+        // =============== Boundary Values Tests ==================
+        // TC10: test case that checks the constructor with the same points in the first and the second parameters
+        assertThrows(IllegalArgumentException.class, //
+                () -> new Plane(new Point(0, 0, 1), new Point(0, 0, 1), new Point(1, 0, 0)), //
+                "Constructed a Plain with the same two first points");
+        // TC11: test case that checks the constructor with all the points in the same line
+        assertThrows(IllegalArgumentException.class, //
+                () -> new Plane(new Point(0, 0, 1), new Point(0, 0, 2), new Point(0, 0, 3)), //
+                "Constructed a Plain with all the points in the same line");
+    }
+
     /**
      * Test method for {@link Plane#findIntersections(Ray)}
      */

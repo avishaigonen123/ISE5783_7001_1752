@@ -34,6 +34,30 @@ public class VectorTest {
             "add() for same length and 180 degrees does not throw an exception");
 
     }
+    /** Test method for {@link primitives.Vector#subtract(Point)}. */
+    @Test
+    void testSubtract() {
+        Vector v1 = new Vector(1, 2, 3);
+        // ============ Equivalence Partitions Tests ==============
+
+        // TC01: Test that checks subtract func with angle that is smaller then 90
+        Vector v2 = new Vector(0, 3, 0);
+        Vector vr = new Vector(1,-1,3);
+        assertEquals( vr,v1.subtract(v2), "subtract() wrong result in less then 90 degrees");
+
+        // TC02: Test that checks subtract func with angle that is smaller then 90
+        v2 = new Vector(0,3,-7);
+        vr = new Vector(1,-1,10);
+        assertEquals( vr,v1.subtract(v2), "subtract() wrong result in more then 90 degrees");
+
+        // =============== Boundary Values Tests ==================
+        // TC11: test zero vector from subtract on the same vectors
+        Vector v3 = new Vector(2, 4, 6);
+        Vector v4 = new Vector(2,4,6);
+        assertThrows(IllegalArgumentException.class, () -> v3.subtract(v4),
+                "subtract() for same length and 180 degrees does not throw an exception");
+
+    }
     /** Test method for {@link primitives.Vector#scale(double)}. */
     @Test
     void testScale() {

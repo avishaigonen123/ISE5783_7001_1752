@@ -2,6 +2,7 @@ package geometries;
 
 import primitives.Ray;
 import primitives.Point;
+import primitives.Util;
 import primitives.Vector;
 
 import java.util.List;
@@ -40,9 +41,9 @@ public class Cylinder extends Tube {
         double t=0;
         if (!p.equals(p0))
             t = v.dotProduct(p.subtract(p0));
-        if (t == this.height) // if the point is on base B return the dir
+        if (Util.isZero(t - this.height)) // if the point is on base B return the dir
             return v;
-        else if (t == 0) // if the point is on base A return the opposite of dir
+        else if (Util.isZero(t)) // if the point is on base A return the opposite of dir
             return v.scale(-1);
         else
             return super.getNormal(p);// if the point is not on the bases then return get normal of tube
