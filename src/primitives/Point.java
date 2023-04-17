@@ -78,4 +78,12 @@ public class Point {
     public String toString() {
         return xyz.toString();
     }
+
+    /**
+     * function that isn't allowed but we must add it. it returns x
+     * @return x
+     */
+    public double getX() {
+        return xyz.d1;
+    }
 }
