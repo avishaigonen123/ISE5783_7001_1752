@@ -1,10 +1,7 @@
 package geometries;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static primitives.Util.isZero;
 
 import org.junit.jupiter.api.Test;
@@ -13,11 +10,19 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
-/** Testing Polygons
- * @author Dan */
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Testing Polygons
+ *
+ * @author Dan
+ */
 public class PolygonTest {
 
-    /** Test method for {@link geometries.Polygon#Polygon(primitives.Point...)}. */
+    /**
+     * Test method for {@link geometries.Polygon#Polygon(primitives.Point...)}.
+     */
     @Test
     public void testConstructor() {
         // ============ Equivalence Partitions Tests ==============
@@ -65,13 +70,15 @@ public class PolygonTest {
 
     }
 
-    /** Test method for {@link geometries.Polygon#getNormal(primitives.Point)}. */
+    /**
+     * Test method for {@link geometries.Polygon#getNormal(primitives.Point)}.
+     */
     @Test
     public void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: There is a simple single test here - using a quad
         Point[] pts =
-                { new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0), new Point(-1, 1, 1) };
+                {new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0), new Point(-1, 1, 1)};
         Polygon pol = new Polygon(pts);
         // ensure there are no exceptions
         assertDoesNotThrow(() -> pol.getNormal(new Point(0, 0, 1)), "");
@@ -89,11 +96,30 @@ public class PolygonTest {
      * Test method for {@link Polygon#findIntersections(Ray)}
      */
     @Test
-    void testFindIntersections(){
+    void testFindIntersections() {
+        Polygon polygon = new Polygon(new Point(0, 0.5, -1), new Point(0, -0.5, -1), new Point(0, -1, 0), new Point(0, 0, 1), new Point(0, 1, 0));
         // ============ Equivalence Partitions Tests ==============
-        // TC01
+        // TC01: test case where the point is inside the polygon (1 point)
+        Point p1 = new Point(0, 0, 0.5);
+        List<Point> result = polygon.findIntersections(new Ray(new Point(1, 0, 0),
+                new Vector(-1, 0, 0.5)));
+        assertEquals(1, result.size(), "Wrong number of points, TC01");
+        assertEquals(List.of(p1), result, "Wrong point, TC01");
+        // TC02: test case where the point is outside against edge (0 points)
+        assertNull(polygon.findIntersections(new Ray(new Point(1, 0, 0), new Vector(-1,0.7,0.7))),
+                "Ray's line out of polygon, TC02");
+        // TC02: test case where the point is outside against vertex (0 points)
+        assertNull(polygon.findIntersections(new Ray(new Point(1, 0, 0), new Vector(-1,0,2))),
+                "Ray's line out of polygon, TC03");
 
         // =============== Boundary Values Tests ==================
-        // TC11:
-    }
+        // TC11: test case where the ray begins before the plane and on edge (0 points)
+        assertNull(polygon.findIntersections(new Ray(new Point(1, 0, 0), new Vector(-1,1,0))),
+                "Ray's line out of polygon, TC11");
+        // TC12: test case where the ray begins before the plane and in vertex (0 points)
+        assertNull(polygon.findIntersections(new Ray(new Point(1, 0, 0), new Vector(-1,0,5))),
+                "Ray's line out of polygon, TC12");
+        // TC13: test case where the ray begins before the plane and on edge's continuation (0 points)
+        assertNull(polygon.findIntersections(new Ray(new Point(1, 0, 0), new Vector(-1,1,-1))),
+                "Ray's line out of polygon, TC13");    }
 }
