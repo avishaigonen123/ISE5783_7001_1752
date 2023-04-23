@@ -32,7 +32,17 @@ public class Ray {
     public Vector getDir() {
         return dir;
     }
-    public Point getPoint(double t){return null;}
+
+    /**
+     * refactoring func that calc the point. p = p0+v*t.
+     * @param t
+     * @return the calculated point.
+     */
+    public Point getPoint(double t){
+        if(Util.isZero(t))
+            return p0;
+        return (p0.add(dir.scale(t)));
+    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
