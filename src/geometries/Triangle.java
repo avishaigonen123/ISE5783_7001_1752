@@ -29,7 +29,7 @@ public class Triangle extends Polygon{
      */
     @Override
     public List<Point> findIntersections(Ray ray) {
-        List<Point> list = plane.findIntersections(ray);
+        List<Point> list = plane.findIntersections(ray); // same as polygon - but only without the loop.
         if(list==null)
             return null;
         Vector v1 = vertices.get(0).subtract(ray.getP0());

@@ -66,9 +66,9 @@ public class Plane implements Geometry {
      */
     @Override
     public List<Point> findIntersections(Ray ray) {
-        if(Util.isZero(ray.getDir().dotProduct(normal)) || p0.equals(ray.getP0()))
+        if(Util.isZero(ray.getDir().dotProduct(normal)) || p0.equals(ray.getP0())) // if the ray is parallel or inside the plane, return null
             return null;
-        double t = (normal.dotProduct(p0.subtract(ray.getP0())))/(normal.dotProduct(ray.getDir()));
-        return (t<0||Util.isZero(t))?null:List.of(ray.getPoint(t));
+        double t = (normal.dotProduct(p0.subtract(ray.getP0())))/(normal.dotProduct(ray.getDir())); // calculate t
+        return (t<0||Util.isZero(t))?null:List.of(ray.getPoint(t)); // if t<=0. return null. other ways, use the func getPoint(t) and return the desire point
     }
 }

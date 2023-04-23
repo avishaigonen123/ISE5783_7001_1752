@@ -92,22 +92,22 @@ public class Polygon implements Geometry {
     */
    @Override
    public List<Point> findIntersections(Ray ray) {
-      List<Point> list = plane.findIntersections(ray);
+      List<Point> list = plane.findIntersections(ray); // check if there is intersection point
       if(list==null)
          return null;
-      Vector v1 = vertices.get(0).subtract(ray.getP0());
-      boolean pos = true,neg = true;
+      Vector v1 = vertices.get(0).subtract(ray.getP0()); // get the first vector
+      boolean pos = true,neg = true; // flags that indicates whether the sign is the same on all the dotProducts or not
       for (int i = 0;i<vertices.size();i++) {
-         Vector vi = vertices.get((i+1)%vertices.size()).subtract(ray.getP0());
-         double nv = ray.getDir().dotProduct((v1.crossProduct(vi)).normalize());
+         Vector vi = vertices.get((i+1)%vertices.size()).subtract(ray.getP0()); // (i+1)%size because we want that in the end we will take v1 and vn.
+         double nv = ray.getDir().dotProduct((v1.crossProduct(vi)).normalize()); // nv indicates the sign of the dotProduct.
          v1 = vi;
-         if (i == 0) {
+         if (i == 0) { // if this is the first loop, we need to turn on the flags
             neg = nv<0;
             pos = !neg;
          }
-         if(pos && nv<0 || neg && nv>0 || Util.isZero(nv))
+         if(pos && nv<0 || neg && nv>0 || Util.isZero(nv)) // if the sign isn't the same, we can't jump out of the func
             return null;
       }
-      return list;
+      return list; // after all, we will return the list
    }
 }

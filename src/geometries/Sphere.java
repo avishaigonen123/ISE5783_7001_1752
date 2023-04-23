@@ -48,25 +48,25 @@ public class Sphere extends RadialGeometry {
     @Override
     public List<Point> findIntersections(Ray ray) {
         if(center.equals(ray.getP0()))//if center and p0 are the same
-            return List.of(center.add(ray.getDir().scale(radius)));
-        Vector u = center.subtract(ray.getP0());
+            return List.of(center.add(ray.getDir().scale(radius))); // we return the p0+radius*v. BVA.
+        Vector u = center.subtract(ray.getP0()); // calculate u
         double tm = Util.alignZero(ray.getDir().dotProduct(u));
-        double d = Math.sqrt(u.lengthSquared() - tm * tm);
+        double d = Math.sqrt(u.lengthSquared() - tm * tm); // like the calculates in the slides
         if (Util.isZero(d - radius) || d > radius)
             return null;
         double th = Math.sqrt(radius*radius - d*d);
         double t1 = tm+th;
         double t2 = tm-th;
-        if(t1 > 0 && t2 > 0) {
+        if(t1 > 0 && t2 > 0) { // if they are both positive, we will return both points.
            return List.of(ray.getPoint(t1),
                    ray.getPoint(t2));
         }
-        if(t1 > 0) {
+        if(t1 > 0) { // if only one is positive, we will return only one point
             return List.of(ray.getPoint(t1));
         }
-        if(t2 > 0) {
+        if(t2 > 0) { // same
             return List.of(ray.getPoint(t2));
         }
-        return null;
+        return null; // otherwise - null
     }
 }
