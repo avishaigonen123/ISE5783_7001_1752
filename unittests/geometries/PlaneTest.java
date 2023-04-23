@@ -80,7 +80,7 @@ public class PlaneTest {
         assertEquals(1, result.size(), "Wrong number of points, TC01");
         assertEquals(List.of(p1), result, "Wrong point, TC01");
         // TC02: test case where the ray must be neither orthogonal nor parallel to the plane, checks where it doesn't intersect. (0 points)
-        assertNull(plane.findIntersections(new Ray(new Point(1, 0, 0), new Vector(0.5, -1, 0))),
+        assertNull(plane.findIntersections(new Ray(new Point(1, 0, 0), new Vector(2, 2, 0))),
                 "Ray's line out of plane, TC02");
 
         // =============== Boundary Values Tests ==================

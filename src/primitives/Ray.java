@@ -32,7 +32,7 @@ public class Ray {
     public Vector getDir() {
         return dir;
     }
-
+    public Point getPoint(double t){return null;}
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

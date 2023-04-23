@@ -47,6 +47,8 @@ public class Sphere extends RadialGeometry {
      */
     @Override
     public List<Point> findIntersections(Ray ray) {
+        if(center.equals(ray.getP0()))//if center and p0 are the same
+            return List.of(center.add(ray.getDir().scale(radius)));
         Vector u = center.subtract(ray.getP0());
         double tm = Util.alignZero(ray.getDir().dotProduct(u));
         double d = Math.sqrt(u.lengthSquared() - tm * tm);
