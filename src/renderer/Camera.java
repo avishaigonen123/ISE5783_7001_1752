@@ -120,9 +120,16 @@ public class Camera {
      * @param i the place in the view plane in the rows
      * @return the constructed ray
      */
-
     public Ray constructRay(int nX, int nY, int j, int i){
-        return null;
+        Point pC = p0.add(vTo.scale(distance));
+        double rY = height/nY;
+        double rX = width/nX;
+        double yI = -(i-(double)(nY-1)/2)*rY;
+        double xJ = (j-(double)(nX-1)/2)*rX;
+        Point pIJ = pC;
+        if(xJ != 0) pIJ = pIJ.add(vRight.scale(xJ));
+        if(yI != 0) pIJ = pIJ.add(vUp.scale(yI));
+        return new Ray(p0, pIJ.subtract(p0));
     }
 
 }
