@@ -19,7 +19,7 @@ public class Sphere extends RadialGeometry {
      * @param _radius the radius
      * @param _center the center point of the sphere
      */
-    Sphere(double _radius, Point _center) {
+    public Sphere(double _radius, Point _center) {
         super(_radius);
         center = _center;
     }

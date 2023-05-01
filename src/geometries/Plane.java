@@ -19,7 +19,7 @@ public class Plane implements Geometry {
      * @param _p0 the point
      * @param _normal the vector normal
      */
-    Plane(Point _p0, Vector _normal) {
+    public Plane(Point _p0, Vector _normal) {
         p0 = _p0;
         normal = _normal.normalize();
     }
