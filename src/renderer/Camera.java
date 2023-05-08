@@ -121,15 +121,15 @@ public class Camera {
      * @return the constructed ray
      */
     public Ray constructRay(int nX, int nY, int j, int i){
-        Point pC = p0.add(vTo.scale(distance));
-        double rY = height/nY;
-        double rX = width/nX;
-        double yI = -(i-(double)(nY-1)/2)*rY;
-        double xJ = (j-(double)(nX-1)/2)*rX;
+        Point pC = p0.add(vTo.scale(distance)); // pCenter = p0 + distance*vTo
+        double rY = height/nY; // the size of each pixel
+        double rX = width/nX; // same
+        double yI = -(i-(double)(nY-1)/2)*rY; // we calculate the height to move up
+        double xJ = (j-(double)(nX-1)/2)*rX; // we calculate the height to move right
         Point pIJ = pC;
-        if(xJ != 0) pIJ = pIJ.add(vRight.scale(xJ));
-        if(yI != 0) pIJ = pIJ.add(vUp.scale(yI));
-        return new Ray(p0, pIJ.subtract(p0));
+        if(xJ != 0) pIJ = pIJ.add(vRight.scale(xJ)); // we don't want to have zero vector
+        if(yI != 0) pIJ = pIJ.add(vUp.scale(yI)); // same
+        return new Ray(p0, pIJ.subtract(p0)); // we return the ray between p0 and the pIJ, the pixel coordinate
     }
 
 }
