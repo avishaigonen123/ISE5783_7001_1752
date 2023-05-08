@@ -52,8 +52,22 @@ public class Ray {
      * @return the closest point
      */
     public Point findClosestPoint(List<Point> list){
-        return null;
+        if(list.isEmpty()||list==null) // if the list is empty / null
+            return null;
+        int minIndex = 0; // the min index
+        double minDistance = list.get(0).distance(p0);
+        double newDistance = Double.MAX_VALUE; // the newDistance is inf
+        int size = list.size();
+        for(int i=1;i<size; i++) {
+         newDistance =list.get(i).distance(p0); // we try to make it more efficient.
+            if (newDistance < minDistance) {
+                minDistance = newDistance;
+                minIndex = i;
+            }
+        }
+        return list.get(minIndex); // the min index
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

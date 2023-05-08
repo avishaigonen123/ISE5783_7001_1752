@@ -7,6 +7,7 @@ import static java.lang.Math.sqrt;
  * class to represent a point. primitive object.
  */
 public class Point {
+    public static final Point ZERO = new Point(0,0,0);
     /**
      * field that holds the coordinates of the point. we use Double3 in the project in order to reduce the DRY.
      */
