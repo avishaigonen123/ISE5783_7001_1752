@@ -1,5 +1,7 @@
 package primitives;
 
+import java.util.List;
+
 /**
  * class that represents ray. a primitive object.
  */
@@ -42,6 +44,15 @@ public class Ray {
         if(Util.isZero(t))
             return p0;
         return (p0.add(dir.scale(t)));
+    }
+
+    /**
+     * the func returns the closest point from the list to the ray
+     * @param list the list
+     * @return the closest point
+     */
+    public Point findClosestPoint(List<Point> list){
+        return null;
     }
     @Override
     public boolean equals(Object obj) {
