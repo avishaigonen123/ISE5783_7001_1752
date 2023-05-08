@@ -73,8 +73,8 @@ public class Camera {
     }
 
     /**
-     * setter for rayTracerBase
-     * @param _rayTracerBase the rayTracerBase
+     * setter for rayTracer
+     * @param _rayTracer the rayTracer
      * @return the camera
      */
     public Camera setRayTracer(RayTracerBase _rayTracer){
@@ -167,10 +167,11 @@ public class Camera {
         int nX = imageWriter.getNx();
         for(int i=0;i<nY;i++)
             for(int j=0;j<nX;j++){
-                imageWriter.writePixel(j,i,castRay(constructRay(nX,nY,j,i)));
+                imageWriter.writePixel(j,i,castRay(j,i));
             }
     }
-    private Color castRay(Ray ray){
+    private Color castRay(int j,int i){
+        Ray ray = constructRay(imageWriter.getNx(),imageWriter.getNy(),j,i);
         return rayTracer.traceRay(ray);
     }
     /**
