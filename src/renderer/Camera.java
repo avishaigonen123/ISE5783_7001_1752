@@ -1,8 +1,11 @@
 package renderer;
 
+import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
 import primitives.Ray;
+
+import java.util.MissingResourceException;
 
 import static primitives.Util.isZero;
 
@@ -17,6 +20,9 @@ public class Camera {
     private double width;
     private double height;
     private double distance;
+
+    private ImageWriter imageWriter;
+    private  RayTracerBase rayTracer;
 
     /**
      * Constructor for initializing Camera
@@ -53,6 +59,26 @@ public class Camera {
      */
     public Camera setVPDistance(double _distance){
         distance = _distance;
+        return this;
+    }
+
+    /**
+     * setter for imageWriter
+     * @param _imageWriter the imageWrite
+     * @return the camera
+     */
+    public Camera setImageWriter(ImageWriter _imageWriter){
+        imageWriter = _imageWriter;
+        return this;
+    }
+
+    /**
+     * setter for rayTracerBase
+     * @param _rayTracerBase the rayTracerBase
+     * @return the camera
+     */
+    public Camera setRayTracer(RayTracerBase _rayTracer){
+        rayTracer = _rayTracer;
         return this;
     }
 
@@ -132,4 +158,84 @@ public class Camera {
         return new Ray(p0, pIJ.subtract(p0)); // we return the ray between p0 and the pIJ, the pixel coordinate
     }
 
+    /**
+     * func that renders the image.
+     */
+    public void renderImage(){
+        checkAreNotEmpty();
+        int nY = imageWriter.getNy();
+        int nX = imageWriter.getNx();
+        for(int i=0;i<nY;i++)
+            for(int j=0;j<nX;j++){
+                imageWriter.writePixel(j,i,castRay(constructRay(nX,nY,j,i)));
+            }
+    }
+    private Color castRay(Ray ray){
+        return rayTracer.traceRay(ray);
+    }
+    /**
+     * func that prints grid
+     * @param interval where we want to put the line
+     * @param color the color
+     */
+    public void printGrid(int interval, Color color){
+        checkAreNotEmpty();
+        for(int i=0; i< imageWriter.getNy();i++)
+            for (int j=0; j< imageWriter.getNx();j++) {
+                if(i%interval == 0 || j%interval == 0)
+                    imageWriter.writePixel(j,i, color);
+            }
+        imageWriter.writeToImage();
+    }
+
+    /**
+     * this func writes to image
+     */
+    public void writeToImage(){
+        checkAreNotEmpty();
+        imageWriter.writeToImage();
+    }
+
+    /**
+     * private func to help us
+     */
+    private void checkAreNotEmpty(){
+        if(p0 == null){//vUp == null||vTo==null||vRight==null||width == 0.0||height==0.0||distance==0||imageWriter==null||rayTracerBase==null){
+            throw new MissingResourceException("the var is empty","Point","p0");
+            //  throw new UnsupportedOperationException();   UnReachable statement
+        }
+        else if(vUp == null){
+            throw new MissingResourceException("the var is empty","Vector","vUp");
+            //  throw new UnsupportedOperationException();   UnReachable statement
+        }
+        else if(vTo == null){
+            throw new MissingResourceException("the var is empty","Vector","vTo");
+            //  throw new UnsupportedOperationException();   UnReachable statement
+        }
+        else if(vRight == null){
+            throw new MissingResourceException("the var is empty","Vector","vRight");
+            //  throw new UnsupportedOperationException();   UnReachable statement
+        }
+        else if(width == 0.0){
+            throw new MissingResourceException("the var is empty","double","width");
+            //  throw new UnsupportedOperationException();   UnReachable statement
+        }
+        else if(height == 0.0){
+            throw new MissingResourceException("the var is empty","double","height");
+            //  throw new UnsupportedOperationException();   UnReachable statement
+        }
+        else if(distance == 0.0){
+            throw new MissingResourceException("the var is empty","double","distance");
+            //  throw new UnsupportedOperationException();   UnReachable statement
+        }
+        else if(imageWriter == null){
+            throw new MissingResourceException("the var is empty","ImageWriter","imageWriter");
+            //  throw new UnsupportedOperationException();   UnReachable statement
+        }
+        else if(rayTracer == null){
+            throw new MissingResourceException("the var is empty","RayTracerBase","rayTracer");
+            //  throw new UnsupportedOperationException();   UnReachable statement
+        }
+
+    }
 }
