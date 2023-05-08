@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import geometries.Sphere;
 import geometries.Triangle;
 import lighting.AmbientLight;
+import parser.XMLParser;
 import primitives.*;
 import renderer.*;
 import scene.Scene;
@@ -81,8 +82,10 @@ public class RenderTests {
     /** Test for XML based scene - for bonus */
     @Test
     public void basicRenderXml() {
-        Scene  scene  = new Scene("XML Test scene");
+        Scene scene  = new Scene("XML Test scene");
         // enter XML file name and parse from XML file into scene object
+        XMLParser xmlParser = new XMLParser();
+        scene = xmlParser.InitializeXMLScene("Scene.xml"); // this func returns scene
         // using the code you added in appropriate packages
         // ...
         // NB: unit tests is not the correct place to put XML parsing code
