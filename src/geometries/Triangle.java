@@ -7,18 +7,21 @@ import primitives.Vector;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.abs;
+
 /**
  * a class to represent a 2D Triangle in 3D
  */
-public class Triangle extends Polygon{
+public class Triangle extends Polygon {
     /**
      * constructor for building the triangle with 3 points
+     *
      * @param p0 point 1
      * @param p1 point 2
      * @param p2 point 3
      */
-    public Triangle(Point p0, Point p1, Point p2){
-        super(p0,p1,p2);
+    public Triangle(Point p0, Point p1, Point p2) {
+        super(p0, p1, p2);
     }
 
     /**
@@ -43,5 +46,8 @@ public class Triangle extends Polygon{
                 return list;
         return null;
 
+        // the Bonus, the third way to calculate intersections
+        
     }
+
 }
