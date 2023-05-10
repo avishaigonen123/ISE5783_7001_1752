@@ -159,9 +159,10 @@ public class Camera {
     }
 
     /**
-     * func that renders the image.
+     * this func render the image
+     * @return this
      */
-    public void renderImage(){
+    public Camera renderImage(){
         checkAreNotEmpty();
         int nY = imageWriter.getNy();
         int nX = imageWriter.getNx();
@@ -169,6 +170,7 @@ public class Camera {
             for(int j=0;j<nX;j++){
                 imageWriter.writePixel(j,i,castRay(j,i));
             }
+        return this;
     }
     private Color castRay(int j,int i){
         Ray ray = constructRay(imageWriter.getNx(),imageWriter.getNy(),j,i);

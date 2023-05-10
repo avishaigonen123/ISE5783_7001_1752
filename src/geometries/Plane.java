@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * a class that represent a 3d plane
  */
-public class Plane implements Geometry {
+public class Plane extends Geometry {
     final private Point p0;
     final private Vector normal;
 
@@ -65,10 +65,11 @@ public class Plane implements Geometry {
      * @return the list of the intersections
      */
     @Override
-    public List<Point> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         if(Util.isZero(ray.getDir().dotProduct(normal)) || p0.equals(ray.getP0())) // if the ray is parallel or inside the plane, return null
             return null;
         double t = (normal.dotProduct(p0.subtract(ray.getP0())))/(normal.dotProduct(ray.getDir())); // calculate t
-        return (t<0||Util.isZero(t))?null:List.of(ray.getPoint(t)); // if t<=0. return null. other ways, use the func getPoint(t) and return the desire point
+        return (t<0||Util.isZero(t))?null:List.of(new GeoPoint(this,ray.getPoint(t))); // if t<=0. return null. other ways, use the func getPoint(t) and return the desire point
     }
+
 }

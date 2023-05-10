@@ -7,8 +7,7 @@ import primitives.Double3;
  * class to present AmbientLight
  */
 
-public class AmbientLight {
-    private Color intensity;
+public class AmbientLight extends Light{
     /**
      * background for the sean
      */
@@ -19,21 +18,7 @@ public class AmbientLight {
      * @param ka attenuation coefficient
      */
     public AmbientLight(Color ia, Double3 ka){
-        intensity = ia.scale(ka);
-    }
-    /**
-     * constructor for AmbientLight
-     * @param ka attenuation coefficient
-     */
-    public AmbientLight(double ka){
-        intensity.scale(ka);
+        super(ia.scale(ka));
     }
 
-    /**
-     * getter for intensity
-     * @return intensity
-     */
-    public Color getIntensity(){
-        return intensity;
-    }
 }

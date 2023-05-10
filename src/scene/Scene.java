@@ -2,7 +2,11 @@ package scene;
 
 import geometries.Geometries;
 import lighting.AmbientLight;
+import lighting.LightSource;
 import primitives.Color;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * class for representing the scene(PDS)
@@ -12,7 +16,7 @@ public class Scene {
     public Color background = Color.BLACK;
     public AmbientLight ambientLight = AmbientLight.NONE;
     public Geometries geometries = new Geometries();
-
+    public List<LightSource> lights = new LinkedList<LightSource>();
     /**
      * constructor for Scene
      * @param _name the name of the scene
@@ -54,6 +58,16 @@ public class Scene {
      */
     public Scene setGeometries(Geometries _geometries){
         geometries = _geometries;
+        return this;
+    }
+
+    /**
+     * setter for lights
+     * @param _lights the lights that are given
+     * @return this
+     */
+    public Scene setLights(List<LightSource> _lights){
+        lights=_lights;
         return this;
     }
 }
