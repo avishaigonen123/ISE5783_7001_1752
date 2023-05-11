@@ -50,7 +50,7 @@ public class Material {
      * @return this
      */
     public Material setShininess(int _nShininess){
-        nShininess = nShininess;
+        nShininess = _nShininess;
         return this;
     }
 

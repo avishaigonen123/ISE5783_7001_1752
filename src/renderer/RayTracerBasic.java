@@ -58,7 +58,7 @@ public class RayTracerBasic extends RayTracerBase {
             return color;
         Material material = gp.geometry.getMaterial();
         for (LightSource lightSource : scene.lights) {
-            l = lightSource.getL(gp.point);
+            l = lightSource.getL(gp.point).normalize();
             nl = Util.alignZero(n.dotProduct(l));
             if (nl * nv > 0) { // sign(nl)==sign(nv)
                 iL = lightSource.getIntensity(gp.point);
@@ -75,8 +75,8 @@ public class RayTracerBasic extends RayTracerBase {
 
     private Double3 calcSpecular(Material material, Vector n, Vector l, double nl, Vector v) {
         int nShininess = material.nShininess;
-        Vector r = l.subtract(n.scale(2*nl)); // r = l - 2 * (l*n) * n
-        double vr = (v.scale(-1)).dotProduct(r);
+        Vector r = (l.subtract(n.scale(2*nl))).normalize(); // r = l - 2 * (l*n) * n
+        double vr = (v.normalize().scale(-1)).dotProduct(r);
         return material.kS.scale((vr > 0) ? pow(vr, nShininess) : 0);
     }
 }
