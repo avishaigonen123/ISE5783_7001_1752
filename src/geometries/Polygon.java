@@ -13,7 +13,7 @@ import primitives.Vector;
 /** Polygon class represents two-dimensional polygon in 3D Cartesian coordinate
  * system
  * @author Dan */
-public class Polygon implements Geometry {
+public class Polygon extends Geometry {
    /** List of polygon's vertices */
    protected final List<Point> vertices;
    /** Associated plane in which the polygon lays */
@@ -90,9 +90,10 @@ public class Polygon implements Geometry {
     * @param ray the ray we want to intersect with
     * @return the list of the intersections
     */
+
    @Override
-   public List<Point> findIntersections(Ray ray) {
-      List<Point> list = plane.findIntersections(ray); // check if there is intersection point
+   public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+      List<GeoPoint> list = plane.findGeoIntersections(ray); // check if there is intersection point
       if(list==null)
          return null;
       Vector v1 = vertices.get(0).subtract(ray.getP0()); // get the first vector
@@ -108,6 +109,7 @@ public class Polygon implements Geometry {
          if(pos && nv<0 || neg && nv>0 || Util.isZero(nv)) // if the sign isn't the same, we can't jump out of the func
             return null;
       }
+      list.get(0).geometry = this;
       return list; // after all, we will return the list
    }
 }

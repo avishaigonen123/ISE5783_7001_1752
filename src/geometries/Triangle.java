@@ -31,8 +31,8 @@ public class Triangle extends Polygon {
      * @return the list of the intersections
      */
     @Override
-    public List<Point> findIntersections(Ray ray) {
-        List<Point> list = plane.findIntersections(ray); // same as polygon - but only without the loop.
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        List<GeoPoint> list = plane.findGeoIntersections(ray); // same as polygon - but only without the loop.
         if(list==null)
             return null;
         Vector v1 = vertices.get(0).subtract(ray.getP0());
@@ -42,12 +42,14 @@ public class Triangle extends Polygon {
         Vector n2 = (v2.crossProduct(v3)).normalize();
         Vector n3 = (v3.crossProduct(v1)).normalize();
         if((ray.getDir().dotProduct(n1)<0 && ray.getDir().dotProduct(n3)<0 && ray.getDir().dotProduct(n2)<0) ||
-                (ray.getDir().dotProduct(n1)>0 && ray.getDir().dotProduct(n3)>0 && ray.getDir().dotProduct(n2)>0))
-                return list;
+                (ray.getDir().dotProduct(n1)>0 && ray.getDir().dotProduct(n3)>0 && ray.getDir().dotProduct(n2)>0)) {
+            list.get(0).geometry = this;
+            return list;
+        }
         return null;
 
         // the Bonus, the third way to calculate intersections
-        
+
     }
 
 }

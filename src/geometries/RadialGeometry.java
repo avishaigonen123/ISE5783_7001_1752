@@ -3,7 +3,7 @@ package geometries;
 /**
  * abstract class that help us to present all the geometries that has radius
  */
-public abstract class RadialGeometry implements Geometry {
+public abstract class RadialGeometry extends Geometry {
     /**
      * the radius of the geometry
      */

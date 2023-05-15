@@ -7,7 +7,9 @@ import primitives.Ray;
 
 import java.util.MissingResourceException;
 
+import static java.lang.Math.*;
 import static primitives.Util.isZero;
+
 
 /**
  * Class that presents our camera
@@ -159,9 +161,10 @@ public class Camera {
     }
 
     /**
-     * func that renders the image.
+     * this func render the image
+     * @return this
      */
-    public void renderImage(){
+    public Camera renderImage(){
         checkAreNotEmpty();
         int nY = imageWriter.getNy();
         int nX = imageWriter.getNx();
@@ -169,6 +172,7 @@ public class Camera {
             for(int j=0;j<nX;j++){
                 imageWriter.writePixel(j,i,castRay(j,i));
             }
+        return this;
     }
     private Color castRay(int j,int i){
         Ray ray = constructRay(imageWriter.getNx(),imageWriter.getNy(),j,i);
@@ -238,5 +242,66 @@ public class Camera {
             //  throw new UnsupportedOperationException();   UnReachable statement
         }
 
+    }
+    // bonus method
+
+    /**
+     * function that transformate the camera by moving the point with a vector
+     * @param vec the vector we want to move on
+     * @return this. we want it to be a builder pattern
+     */
+    public Camera Transfromation(Vector vec)
+    {
+        p0 = p0.add(vec); // we moved the point of the camera
+
+        return this;
+    }
+
+    /**
+     * function that rotate the camera around the axis X
+     * @param aCel the angle (cel)
+     * @return this. we want it to be a builder pattern
+     */
+    public Camera RotationOnXaxis(double aCel)
+    {
+        double a = toRadians(aCel);
+        double x = vTo.getX(), y=  vTo.getY(), z = vTo.getZ();
+        vTo = new Vector(x, y*cos(a)-z*sin(a),y*sin(a)+z*cos(a)); // rotation matrix for rotating in the axis
+        x = vUp.getX(); y=  vUp.getY(); z = vUp.getZ();
+        vUp = new Vector(x, y*cos(a)-z*sin(a),y*sin(a)+z*cos(a)); // same what only with the second vector
+        vRight  = vTo.crossProduct(vUp);
+        return this;
+    }
+
+    /**
+     * function that rotate the camera around the axis Y
+     * @param aCel the angle (cel)
+     * @return this. we want it to be a builder pattern
+     */
+    public Camera RotationOnYaxis(double aCel)
+    {
+        double a = toRadians(aCel);
+        double x = vTo.getX(), y=  vTo.getY(), z = vTo.getZ();
+        vTo = new Vector(x*cos(a)+z*sin(a), y,-x*sin(a)+z*cos(a)); // rotation matrix for rotating in the axis
+        x = vUp.getX(); y=  vUp.getY(); z = vUp.getZ();
+        vUp = new Vector(x*cos(a)+z*sin(a), y,-x*sin(a)+z*cos(a)); // same what only with the second vector
+        vRight  = vTo.crossProduct(vUp);
+        return this;
+    }
+
+    /**
+     * function that rotate the camera around the axis Z
+     * @param aCel the angle (cel)
+     * @return this. we want it to be a builder pattern
+     */
+    public Camera RotationOnZaxis(double aCel)
+    {
+        double a = toRadians(aCel);
+        double x = vTo.getX(), y=  vTo.getY(), z = vTo.getZ();
+        vTo = new Vector(x*cos(a)-y*sin(a), x*sin(a)+y*cos(a),z); // rotation matrix for rotating in the axis
+        x = vUp.getX(); y=  vUp.getY(); z = vUp.getZ();
+        vUp = new Vector(x*cos(a)-y*sin(a), x*sin(a)+y*cos(a),z); // same what only with the second vector
+        vRight  = vTo.crossProduct(vUp);
+        return this;
     }
 }

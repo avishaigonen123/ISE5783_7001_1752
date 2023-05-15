@@ -1,6 +1,7 @@
 package primitives;
 
 import java.util.List;
+import geometries.Intersectable.GeoPoint;
 
 /**
  * class that represents ray. a primitive object.
@@ -48,18 +49,28 @@ public class Ray {
 
     /**
      * the func returns the closest point from the list to the ray
+     * @param points the list
+     * @return the closest point
+     */
+    public Point findClosestPoint(List<Point> points) {
+        return points == null || points.isEmpty() ? null
+                : findClosestGeoPoint(points.stream().map(p -> new GeoPoint(null, p)).toList()).point;
+    }
+
+    /**
+     * the func returns the closest point from the list to the ray
      * @param list the list
      * @return the closest point
      */
-    public Point findClosestPoint(List<Point> list){
-        if(list.isEmpty()||list==null) // if the list is empty / null
+    public GeoPoint findClosestGeoPoint(List<GeoPoint> list){
+        if(list==null||list.isEmpty()) // if the list is empty / null
             return null;
         int minIndex = 0; // the min index
-        double minDistance = list.get(0).distance(p0);
+        double minDistance = list.get(0).point.distance(p0);
         double newDistance = Double.MAX_VALUE; // the newDistance is inf
         int size = list.size();
         for(int i=1;i<size; i++) {
-         newDistance =list.get(i).distance(p0); // we try to make it more efficient.
+            newDistance =list.get(i).point.distance(p0); // we try to make it more efficient.
             if (newDistance < minDistance) {
                 minDistance = newDistance;
                 minIndex = i;
@@ -67,7 +78,6 @@ public class Ray {
         }
         return list.get(minIndex); // the min index
     }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

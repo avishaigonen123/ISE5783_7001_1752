@@ -32,6 +32,31 @@ public class Point {
     }
 
     /**
+     * function that isn't allowed, but we must add it. it returns x
+     * @return x
+     */
+    public double getX() {
+        return xyz.d1;
+    }
+
+    /**
+     * function that isn't allowed, but we must add it. it returns y
+     * @return y
+     */
+    public double getY() {
+        return xyz.d2;
+    }
+
+    /**
+     * function that isn't allowed, but we must add it. it returns z
+     * @return z
+     */
+    public double getZ() {
+        return xyz.d3;
+    }
+
+
+    /**
      * subtructs this point by that point
      * @param point that point
      * @return the vector that starts with that point to this point
@@ -80,11 +105,5 @@ public class Point {
         return xyz.toString();
     }
 
-    /**
-     * function that isn't allowed but we must add it. it returns x
-     * @return x
-     */
-    public double getX() {
-        return xyz.d1;
-    }
+
 }
