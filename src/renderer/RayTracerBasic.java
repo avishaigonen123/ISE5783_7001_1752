@@ -13,12 +13,27 @@ import static java.lang.Math.pow;
 
 public class RayTracerBasic extends RayTracerBase {
     /**
+     * we will move the ray of the shadow in the normal direction inorder to not intersect ourselves
+     */
+    private static final double DELTA = 0.1;
+    /**
      * constructor that activate the father constructor
      *
      * @param scene the scene
      */
     public RayTracerBasic(Scene scene) {
         super(scene);
+    }
+
+    /**
+     * the function to decide if the light ray is obstructed
+     * @param gp the point to be unshaded
+     * @param l the direction from the light
+     * @param n the normal for the point(for DELTA)
+     * @return true if the point is unshaded
+     */
+    private boolean unshaded(GeoPoint gp,Vector l,Vector n){
+        return true;
     }
 
     /**
@@ -60,7 +75,7 @@ public class RayTracerBasic extends RayTracerBase {
         for (LightSource lightSource : scene.lights) {
             l = lightSource.getL(gp.point).normalize();
             nl = Util.alignZero(n.dotProduct(l));
-            if (nl * nv > 0) { // sign(nl)==sign(nv)
+            if (nl * nv > 0 && unshaded(gp,l,n)) { // sign(nl)==sign(nv)
                 iL = lightSource.getIntensity(gp.point);
                 color = color.add(iL.scale(calcDiffusive(material, nl)))
                         .add(iL.scale(calcSpecular(material, n, l, nl, v)));

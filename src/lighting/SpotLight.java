@@ -10,6 +10,7 @@ import primitives.Point;
  */
 public class SpotLight extends PointLight {
     private Vector direction;
+    private double nRestriction = 1;
 
     /**
      * constructor for PointLight
@@ -21,6 +22,16 @@ public class SpotLight extends PointLight {
     public SpotLight(Color _intensity, Point _position, Vector _direction) {
         super(_intensity, _position);
         direction = _direction.normalize();
+    }
+
+    /**
+     * setter for nRestriction
+     * @param nRestriction the nRestriction
+     * @return this
+     */
+    public SpotLight setnRestriction(double nRestriction) {
+        this.nRestriction = nRestriction;
+        return this;
     }
 
     @Override

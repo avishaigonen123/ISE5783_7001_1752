@@ -23,7 +23,16 @@ public class Sphere extends RadialGeometry {
         super(_radius);
         center = _center;
     }
-
+    /**
+     * a constructor that initialize the cylinder
+     *
+     * @param _radius the radius
+     * @param _center the center point of the sphere
+     */
+    public Sphere(Point _center, double _radius) {
+        super(_radius);
+        center = _center;
+    }
     /**
      * getter for center
      *
