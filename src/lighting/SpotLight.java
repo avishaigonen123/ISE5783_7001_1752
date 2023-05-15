@@ -4,6 +4,8 @@ import primitives.Color;
 import primitives.Vector;
 import primitives.Point;
 
+import static java.lang.Math.pow;
+
 
 /**
  * class for SpotLight
@@ -29,7 +31,7 @@ public class SpotLight extends PointLight {
      * @param nRestriction the nRestriction
      * @return this
      */
-    public SpotLight setnRestriction(double nRestriction) {
+    public SpotLight setNarrowBeam(double nRestriction) {
         this.nRestriction = nRestriction;
         return this;
     }
@@ -42,6 +44,8 @@ public class SpotLight extends PointLight {
     @Override
     public Color getIntensity(Point p) {
         double angle = direction.dotProduct(getL(p)); // dir*l
-        return super.getIntensity(p).scale((angle>0?angle:0)); // [ I0 / (kC + kL*d + kQ*(d^2)) ] * max(0,dir*l)
+        return super.getIntensity(p).scale(pow((angle>0?angle:0),nRestriction)); // [ I0 / (kC + kL*d + kQ*(d^2)) ] * max(0,dir*l)
+        // nRestriction is like nShininess
     }
+
 }
