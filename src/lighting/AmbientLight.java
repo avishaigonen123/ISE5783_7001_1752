@@ -20,5 +20,13 @@ public class AmbientLight extends Light{
     public AmbientLight(Color ia, Double3 ka){
         super(ia.scale(ka));
     }
+    /**
+     * constructor for AmbientLight
+     * @param ia intensity
+     * @param ka attenuation coefficient
+     */
+    public AmbientLight(Color ia, double ka){
+        super(ia.scale(ka));
+    }
 
 }
