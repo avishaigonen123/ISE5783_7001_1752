@@ -5,6 +5,8 @@ package renderer;
 
 import static java.awt.Color.*;
 
+import geometries.Plane;
+import geometries.Polygon;
 import org.junit.jupiter.api.Test;
 
 import geometries.Sphere;
@@ -104,4 +106,35 @@ public class ReflectionRefractionTests {
          .renderImage() //
          .writeToImage();
    }
+
+   /** Produce a picture with an infinite mirror
+    * partially
+    * transparent Sphere producing partial shadow */
+   @Test
+   public void twoPlanesOneSphere() {
+      Camera camera = new Camera(new Point(-20,  30,0), new Vector(0, -1, 0), new Vector(0, 0, 1)) //
+              .setVPSize(200, 200).setVPDistance(1000);
+      camera.RotationOnZaxis(80);
+
+      scene.setAmbientLight(new AmbientLight(new Color(WHITE), 0.15));
+
+      scene.geometries.add( //
+              new Polygon(new Point(-20,-100,-200),new Point(-20,100,-200),new Point(-20,100,200),new Point(-20,-100,200)).setEmission(new Color(WHITE).scale(0.03)) //
+                      .setMaterial(new Material().setKd(0.8).setKs(0.5).setShininess(60).setKr(0.59).setKt(0)), //
+              new Polygon(new Point(20,-100,-200),new Point(20,100,-200),new Point(20,100,200),new Point(20,-100,200)).setEmission(new Color(WHITE).scale(0.03)) //
+                      .setMaterial(new Material().setKd(0.8).setKs(0.5).setShininess(60).setKr(0.59).setKt(0)), //
+              new Sphere(new Point(0,0,0), 7d).setEmission(new Color(BLUE)) //
+                      .setMaterial(new Material().setKd(0.2).setKs(0.2).setShininess(30).setKt(0.2).setKr(1)));
+
+      scene.lights.add(new SpotLight(new Color(YELLOW).scale(1.1), new Point(0, 0, 1000), new Vector(0, 0, -1)) //
+              .setKl(4E-5).setKq(2E-7));
+
+      ImageWriter imageWriter = new ImageWriter("twoPlanesOneSphere", 600, 600);
+      camera.setImageWriter(imageWriter) //
+              .setRayTracer(new RayTracerBasic(scene)) //
+              .renderImage() //
+              .writeToImage();
+   }
+
+
 }
