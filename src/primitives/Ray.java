@@ -7,6 +7,10 @@ import geometries.Intersectable.GeoPoint;
  * class that represents ray. a primitive object.
  */
 public class Ray {
+    /**
+     * we will move the ray of the shadow in the normal direction inorder to not intersect ourselves
+     */
+    private static final double DELTA = 0.1;
     private final Point p0;
     private final Vector dir;
 
@@ -20,6 +24,18 @@ public class Ray {
         dir = vec.normalize();
     }
 
+    /**
+     * constructor for refactor, for create a ray
+     * @param v the vector to be moved
+     * @param n the normal vector by
+     * @param gp the point in which we moved
+     */
+    public Ray(Vector v, Vector n, GeoPoint gp){
+        Vector normalInDirMoved = n.scale(n.dotProduct(v) > 0 ? DELTA : -DELTA);
+        Point point = gp.point.add(normalInDirMoved);
+        p0=point;
+        dir=v;
+    }
     /**
      * getter for p0
      * @return the field p0
