@@ -10,6 +10,7 @@ import java.util.List;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.pow;
+import static renderer.PictureImprover.superSampling;
 
 public class RayTracerBasic extends RayTracerBase {
     /**
@@ -21,6 +22,10 @@ public class RayTracerBasic extends RayTracerBase {
      */
     private static final double MIN_CALC_COLOR_K = 0.001;
 
+    /**
+     * that is for the numbers of rays
+     */
+    private static final int NUM_OF_RAYS = 10;
 
     /**
      * constructor that activate the father constructor
@@ -97,7 +102,25 @@ public class RayTracerBasic extends RayTracerBase {
         return 1 == level ? color
                 : color.add(calcGlobalEffects(geoPoint, ray, level, k));
     }
+    ///
 
+    private Color calcColorSampling(GeoPoint gp, Ray ray, int level, Double3 k, double area){
+        if(area==0)
+            return calcColor(gp,ray,level,k);
+        // now there is super sampling, we will return the average
+        Color total = Color.BLACK;
+
+
+        List<Point> listOfPoints = superSampling(ray,area, NUM_OF_RAYS);
+        for (Point point: listOfPoints) {
+            Ray raySampled = new Ray(gp.point,point.subtract(gp.point));
+            total.add(calcColor(gp,raySampled,level,k));
+        }
+
+        return total.scale(1/(double)NUM_OF_RAYS);
+    }
+
+    ///
     private Color calcColor(GeoPoint gp, Ray ray) {
         return calcColor(gp, ray, MAX_CALC_COLOR_LEVEL, new Double3(1)).add(scene.ambientLight.getIntensity());
     }
@@ -110,14 +133,14 @@ public class RayTracerBasic extends RayTracerBase {
             Ray reflectedRay = constructReflectionRay(ray.getDir(), gp.geometry.getNormal(gp.point), gp);
             GeoPoint reflectedPoint = findClosestIntersection(reflectedRay);
             color = reflectedPoint == null ? color
-                    : color.add(calcColor(reflectedPoint, reflectedRay, level - 1, kkr).scale(kr));
+                    : color.add(calcColorSampling(reflectedPoint, reflectedRay, level - 1, kkr,mat.kG).scale(kr));
         }
         Double3 kt = mat.kT, kkt = k.product(kt);
         if (!kkt.lowerThan(MIN_CALC_COLOR_K)) {
             Ray refractedRay = constructRefractedRay(ray.getDir(), gp.geometry.getNormal(gp.point), gp);
             GeoPoint refractedPoint = findClosestIntersection(refractedRay);
             color = refractedPoint == null ? color
-                    : color.add(calcColor(refractedPoint, refractedRay, level - 1, kkt).scale(kt));
+                    : color.add(calcColorSampling(refractedPoint, refractedRay, level - 1, kkt,mat.kB).scale(kt));
         }
         return color;
     }

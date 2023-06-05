@@ -10,6 +10,14 @@ public class Material {
      * kT is for the tranperancy, and kR is for the reflection
      */
     public Double3 kT = Double3.ZERO, kR = Double3.ZERO;
+    /**
+     * kG is for the glossery
+     */
+    public double kG = 0;
+    /**
+     * kB is for the blorry
+     */
+    public double kB = 0;
 
     /**
      * setter for kD
@@ -99,6 +107,41 @@ public class Material {
     public Material setShininess(int _nShininess) {
         nShininess = _nShininess;
         return this;
+    }
+
+    /**
+     * setter for kB
+     * @param _kB the kB
+     * @return this
+     */
+    public Material setKb(double _kB){
+        kB=_kB;
+        return this;
+    }
+    /**
+     * setter for kG
+     * @param _kG the kG
+     * @return this
+     */
+    public Material setKg(double _kG){
+        kG=_kG;
+        return this;
+    }
+
+    /**
+     * getter for kB
+     * @return kB
+     */
+    public double getKb(){
+        return kB;
+    }
+
+    /**
+     * getter for kG
+     * @return kG
+     */
+    public double getKg(){
+        return kG;
     }
 
 }
