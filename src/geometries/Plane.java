@@ -30,7 +30,7 @@ public class Plane extends Geometry {
      * @param p2 point 2
      * @param p3 point 3
      */
-    Plane(Point p1, Point p2, Point p3) {
+    public Plane(Point p1, Point p2, Point p3) {
         Vector v1 = p2.subtract(p1);
         Vector v2 = p3.subtract(p1);
         normal = v1.crossProduct(v2).normalize();
