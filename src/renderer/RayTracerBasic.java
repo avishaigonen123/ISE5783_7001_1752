@@ -25,7 +25,7 @@ public class RayTracerBasic extends RayTracerBase {
     /**
      * that is for the numbers of rays
      */
-    private static final int NUM_OF_RAYS = 10;
+    private static final int NUM_OF_RAYS = 200;
 
     /**
      * constructor that activate the father constructor
@@ -113,10 +113,9 @@ public class RayTracerBasic extends RayTracerBase {
 
         List<Point> listOfPoints = superSampling(ray,area, NUM_OF_RAYS);
         for (Point point: listOfPoints) {
-            Ray raySampled = new Ray(gp.point,point.subtract(gp.point));
-            total.add(calcColor(gp,raySampled,level,k));
+            Ray raySampled = new Ray(gp.point,point.subtract(gp.point));//,gp.geometry.getNormal(gp.point),gp);
+            total =total.add(calcColor(gp,raySampled,level,k));
         }
-
         return total.scale(1/(double)NUM_OF_RAYS);
     }
 
@@ -137,12 +136,23 @@ public class RayTracerBasic extends RayTracerBase {
         }
         Double3 kt = mat.kT, kkt = k.product(kt);
         if (!kkt.lowerThan(MIN_CALC_COLOR_K)) {
-            Ray refractedRay = constructRefractedRay(ray.getDir(), gp.geometry.getNormal(gp.point), gp);
-            GeoPoint refractedPoint = findClosestIntersection(refractedRay);
-            color = refractedPoint == null ? color
-                    : color.add(calcColorSampling(refractedPoint, refractedRay, level - 1, kkt,mat.kB).scale(kt));
+
+            Ray OGrefractedRay = constructRefractedRay(ray.getDir(), gp.geometry.getNormal(gp.point), gp);
+            Ray refractedRay = null;
+            GeoPoint refractedPoint = null;
+            List<Point> pointList = superSampling(OGrefractedRay,mat.kB,NUM_OF_RAYS);
+            for (Point point:pointList) {
+                refractedRay = new Ray(gp.point, point.subtract(gp.point));
+                refractedPoint = findClosestIntersection(refractedRay);
+                color = refractedPoint == null ? color
+                        : color.add(calcColor(refractedPoint, refractedRay, level - 1, kkt).scale(kt));
+            }
+
+        //    GeoPoint refractedPoint = findClosestIntersection(OGrefractedRay);
+        //    color = refractedPoint == null ? color
+        //            : color.add(calcColorSampling(refractedPoint, OGrefractedRay, level - 1, kkt,mat.kB).scale(kt));
         }
-        return color;
+        return color.scale(1/(double)NUM_OF_RAYS);
     }
 
     private Color calcLocalEffects(GeoPoint gp, Ray ray, Double3 k) {

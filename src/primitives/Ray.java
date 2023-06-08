@@ -1,6 +1,8 @@
 package primitives;
 
 import java.util.List;
+import java.util.Random;
+
 import geometries.Intersectable.GeoPoint;
 
 /**
@@ -93,6 +95,33 @@ public class Ray {
             }
         }
         return list.get(minIndex); // the min index
+    }
+
+    /**
+     * func that gets ray and returns an orthogonal ray, that starts at the point it gets
+     * @return the orthogonal ray
+     */
+    public Ray randomOrthogonalRay() {
+        Vector vector = this.getDir();
+        Point point = this.getP0();
+
+        // Generate random values for the orthogonal vector components
+        Random random = new Random();
+        double x = random.nextDouble();
+        double y = random.nextDouble();
+        double z = random.nextDouble();
+        Vector vector1 = new Vector(x,y,z);
+
+        // Calculate the dot product between the original vector and the orthogonal vector
+        double dotProduct = vector1.dotProduct(vector);
+
+        // Subtract the projection of the original vector from the orthogonal vector
+        x -= dotProduct * vector.getX();
+        y -= dotProduct * vector.getY();
+        z -= dotProduct * vector.getZ();
+        Vector v = new Vector(x,y,z);
+
+        return new Ray(point, v);
     }
     @Override
     public boolean equals(Object obj) {

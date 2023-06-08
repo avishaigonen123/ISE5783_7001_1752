@@ -57,7 +57,14 @@ class RayTest {
         list.add(new Point(2,0,0));
         list.add(new Point(1,0,0));
         assertEquals(new Point(1,0,0),ray.findClosestPoint(list),"TC12: the closest point is in the end of the list ");
+    }
 
-
+    @Test
+    void randomOrthogonalRay(){
+        Ray ray = new Ray(new Point(10,0,10),new Vector(0,0,1));
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: two orthogonal vector
+        Ray res = ray.randomOrthogonalRay();
+        assertEquals(0,Util.alignZero(res.getDir().dotProduct(ray.getDir())),"OH NO, they are not orthogonals");
     }
 }
