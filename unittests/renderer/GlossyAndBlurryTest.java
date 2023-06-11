@@ -186,7 +186,7 @@ public class GlossyAndBlurryTest {
    public void sphereMultipleLightsBlurry() {
       scene1.geometries.add(sphere,
               new Polygon(new Point(-50,50,500),new Point(50,50,500),new Point(50,-50,500),new Point(-50,-50,500)).setEmission(new Color(WHITE).scale(0.003)) //
-                      .setMaterial(new Material().setKd(0.8).setKs(0.5).setShininess(60).setKt(0.7).setKb(0.0001))
+                      .setMaterial(new Material().setKd(0.8).setKs(0.5).setShininess(60).setKt(0.7).setKb(0.1))
       );
       scene1.lights.add(new SpotLight(sphereLightColor, sphereLightPosition, new Vector(1, 1, -0.5))
               .setKl(0.001).setKq(0.0001));
