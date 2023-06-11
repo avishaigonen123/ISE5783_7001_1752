@@ -15,18 +15,25 @@ public class PictureImprover {
     /**
      * that is for the distance from the target plane to the point
      */
-    private static final double DISTANCE = 0.2;
+    private static final double DISTANCE = 100;
 
-    static List<Point> superSampling( Ray ray, double area, int numOfRays) {
+    static List<Point> superSampling(Ray ray, double area, int numOfRays) {
         LinkedList<Point> res = new LinkedList<>();
         Point pC = ray.getPoint(DISTANCE); // the center of the targetArea
+        if (area == 0)
+            return List.of(pC);
         Random random = new Random();
         for (int i = 0; i < numOfRays; i++) {
             Ray randomRay = new Ray(pC,ray.getDir()).randomOrthogonalRay();
-
-
-            double t = random.nextDouble() * area; // random values between 0 to radius
-            res.add(randomRay.getPoint(t));
+            if(randomRay == null)
+                res.add(pC);
+            else {
+                double t = random.nextDouble() * area; // random values between 0 to radius
+                if (!Util.isZero(t))
+                    res.add(randomRay.getPoint(t));
+                else
+                    res.add(pC);
+            }
         }
         return res;
     }
