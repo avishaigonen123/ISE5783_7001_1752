@@ -1,5 +1,7 @@
 package primitives;
 
+import java.util.Random;
+
 import static java.lang.Math.sqrt;
 
 /**
