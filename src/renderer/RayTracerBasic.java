@@ -104,9 +104,9 @@ public class RayTracerBasic extends RayTracerBase {
     }
     ///
 
-    private Color calcColorSampling(GeoPoint gp, Ray ray, int level, Double3 k, double area){
+    private Color calcColorSampling(GeoPoint gp, Ray ray, int level, Double3 kX, Double3 kkX, double area){
         if(area==0)
-            return calcColor(gp,ray,level,k);
+            return calcColor(gp,ray,level,kX);
         // now there is super sampling, we will return the average
         Color total = Color.BLACK;
 
@@ -114,7 +114,11 @@ public class RayTracerBasic extends RayTracerBase {
         List<Point> listOfPoints = superSampling(ray,area, NUM_OF_RAYS);
         for (Point point: listOfPoints) {
             Ray raySampled = new Ray(gp.point,point.subtract(gp.point));//,gp.geometry.getNormal(gp.point),gp);
-            total =total.add(calcColor(gp,raySampled,level,k));
+            GeoPoint refractedPoint = findClosestIntersection(raySampled);
+            total = refractedPoint == null ? total
+                    : total.add(calcColor(refractedPoint, raySampled, level - 1, kkX).scale(kX));
+
+      //      total =total.add(calcColor(gp,raySampled,level-1,kX)).scale(kkX);
         }
         return total.scale(1/(double)NUM_OF_RAYS);
     }
@@ -128,17 +132,20 @@ public class RayTracerBasic extends RayTracerBase {
         Color color = Color.BLACK;
         Material mat = gp.geometry.getMaterial();
         Double3 kr = mat.kR, kkr = k.product(kr);
-        if (!kkr.lowerThan(MIN_CALC_COLOR_K)) {
+    /*    if (!kkr.lowerThan(MIN_CALC_COLOR_K)) {
             Ray reflectedRay = constructReflectionRay(ray.getDir(), gp.geometry.getNormal(gp.point), gp);
             GeoPoint reflectedPoint = findClosestIntersection(reflectedRay);
             color = reflectedPoint == null ? color
                     : color.add(calcColorSampling(reflectedPoint, reflectedRay, level - 1, kkr,mat.kG).scale(kr));
-        }
+        }*/
         Double3 kt = mat.kT, kkt = k.product(kt);
         if (!kkt.lowerThan(MIN_CALC_COLOR_K)) {
 
             Ray OGrefractedRay = constructRefractedRay(ray.getDir(), gp.geometry.getNormal(gp.point), gp);
-            Ray refractedRay = null;
+            color = calcColorSampling(gp,OGrefractedRay,level,kt,kkt,mat.kB);
+        }
+        return color;
+          /*  Ray refractedRay = null;
             GeoPoint refractedPoint = null;
             List<Point> pointList = superSampling(OGrefractedRay,mat.kB,NUM_OF_RAYS);
             for (Point point:pointList) {
@@ -152,7 +159,7 @@ public class RayTracerBasic extends RayTracerBase {
         //    color = refractedPoint == null ? color
         //            : color.add(calcColorSampling(refractedPoint, OGrefractedRay, level - 1, kkt,mat.kB).scale(kt));
         }
-        return color.scale(1/(double)NUM_OF_RAYS);
+        return color.scale(1/(double)NUM_OF_RAYS);*/
     }
 
     private Color calcLocalEffects(GeoPoint gp, Ray ray, Double3 k) {
