@@ -21,6 +21,13 @@ public class Color {
 
     /** Yellow color = (255,255,0) */
     public static final Color YELLOW = new Color(255,255,0);
+    /** CYAN color = (0,191,255)*/
+    public static final Color CYAN = new Color(0,191,255);
+    /** GRAY color = (128,128,128)     */
+    public static final Color GRAY = new Color(128,128,128);
+    /** MAROON color = (139,69,19)*/
+    public static final Color MAROON = new Color(139,69,19);
+    /** MAROON color = (255,255,0) */
 
     /** Default constructor - to generate Black Color (privately) */
     private Color() { rgb = Double3.ZERO; }
