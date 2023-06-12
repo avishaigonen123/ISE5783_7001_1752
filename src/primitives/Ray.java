@@ -110,6 +110,8 @@ public class Ray {
         double x = random.nextDouble();
         double y = random.nextDouble();
         double z = random.nextDouble();
+        if(Util.isZero(x) && Util.isZero(y) && Util.isZero(z))
+            return null;
         Vector vector1 = new Vector(x,y,z);
 
         // Calculate the dot product between the original vector and the orthogonal vector
