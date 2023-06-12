@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import geometries.*;
 import lighting.*;
 import primitives.*;
-import renderer.*;
 import scene.Scene;
 
 /** Test rendering a basic image
@@ -171,7 +170,7 @@ public class LightsTests {
         scene1.lights.add(new SpotLight(Color.RED.scale(20),new Point(100,0,100),new Vector(0,0,-1)).setKq(0.0001).setKl(0.0001).setKc(1));
 
         ImageWriter imageWriter = new ImageWriter("sphereRotating", 500, 500);
-        camera1.setImageWriter(imageWriter).RotationOnXaxis(0).RotationOnYaxis(0).RotationOnZaxis(0).Transfromation(new Vector(1,0,0)) //
+        camera1.setImageWriter(imageWriter).RotationOnXaxis(0).RotationOnYaxis(0).RotationOnZaxis(0).transformation(new Vector(1,0,0)) //
                 .setRayTracer(new RayTracerBasic(scene1)) //
                 .renderImage() //
                 .writeToImage(); //

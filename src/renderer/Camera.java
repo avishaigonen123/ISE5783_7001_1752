@@ -250,7 +250,7 @@ public class Camera {
      * @param vec the vector we want to move on
      * @return this. we want it to be a builder pattern
      */
-    public Camera Transfromation(Vector vec)
+    public Camera transformation(Vector vec)
     {
         p0 = p0.add(vec); // we moved the point of the camera
 

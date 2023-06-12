@@ -15,7 +15,6 @@ import geometries.Triangle;
 import lighting.AmbientLight;
 import lighting.SpotLight;
 import primitives.*;
-import renderer.*;
 import scene.Scene;
 
 /**
@@ -152,7 +151,7 @@ public class ReflectionRefractionTests {
     public void HouseBonusTest() {
         Camera camera = new Camera(new Point(0, -6000, 100), new Vector(0, 1, 0), new Vector(0, 0, 1)) //
                 .setVPSize(200, 200).setVPDistance(1000);
-        camera.Transfromation(new Vector(0, 0, 150));
+        camera.transformation(new Vector(0, 0, 150));
 
         scene.setAmbientLight(new AmbientLight(new Color(WHITE), 0.15));
         scene.setBackground(Color.CYAN);
