@@ -29,6 +29,7 @@ public class PictureImprover {
                 res.add(pC);
             else {
                 double t = random.nextDouble() * area; // random values between 0 to radius
+                
                 if (!Util.isZero(t))
                     res.add(randomRay.getPoint(t));
                 else

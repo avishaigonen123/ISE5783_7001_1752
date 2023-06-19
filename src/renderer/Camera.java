@@ -168,10 +168,23 @@ public class Camera {
         checkAreNotEmpty();
         int nY = imageWriter.getNy();
         int nX = imageWriter.getNx();
+        double interval =  0.5;
+        double threadsCount = 4;
+
+        Pixel.initialize(nY, nX, interval);
+        while (threadsCount-- > 0) {
+            new Thread(() -> {
+                for (Pixel pixel = new Pixel(); pixel.nextPixel(); Pixel.pixelDone())
+                    imageWriter.writePixel(pixel.col,pixel.row,castRay(pixel.col,pixel.row));
+            }).start();
+        }
+        Pixel.waitToFinish();
+/*
         for(int i=0;i<nY;i++)
             for(int j=0;j<nX;j++){
                 imageWriter.writePixel(j,i,castRay(j,i));
             }
+            */
         return this;
     }
     private Color castRay(int j,int i){

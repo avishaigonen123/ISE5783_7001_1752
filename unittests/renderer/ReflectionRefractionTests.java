@@ -69,11 +69,11 @@ public class ReflectionRefractionTests {
                 new Triangle(new Point(1500, -1500, -1500), new Point(-1500, 1500, -1500),
                         new Point(670, 670, 3000)) //
                         .setEmission(new Color(20, 20, 20)) //
-                        .setMaterial(new Material().setKr(1)),
+                        .setMaterial(new Material().setKr(1).setKg(1)),
                 new Triangle(new Point(1500, -1500, -1500), new Point(-1500, 1500, -1500),
                         new Point(-1500, -1500, -2000)) //
                         .setEmission(new Color(20, 20, 20)) //
-                        .setMaterial(new Material().setKr(new Double3(0.5, 0, 0.4))));
+                        .setMaterial(new Material().setKr(new Double3(0.5, 0, 0.4)).setKg(1)));
 
         scene.lights.add(new SpotLight(new Color(1020, 400, 400), new Point(-750, -750, -150), new Vector(-1, -1, -4)) //
                 .setKl(0.00001).setKq(0.000005));
@@ -225,7 +225,7 @@ public class ReflectionRefractionTests {
                         .setMaterial(new Material().setKd(0.05).setKs(0.05).setShininess(60).setKt(0.8)).setEmission(Color.GRAY.scale(0.8)),
                 new Sphere(3d, new Point(-25, 5, 115))
                         .setMaterial(new Material().setKd(0.05).setKs(0.05).setShininess(60).setKt(0.9)).setEmission(Color.GRAY.scale(0.9))
-                , new Plane(new Point(400,400,40),new Vector(-1,-1,0)).setMaterial(window.setKb(2).setKt(1))// MIRRRORRRRRR
+                , new Plane(new Point(400,400,40),new Vector(-1,-1,0)).setMaterial(window.setKb(0.3).setKt(1))// MIRRRORRRRRR
 //                , new Polygon(p18, p19,p20,p21).setEmission(Color.MAROON.scale(0.8))
         );
 

@@ -116,8 +116,10 @@ public class RayTracerBasic extends RayTracerBase {
         GeoPoint refractedPoint = null;
         List<Point> pointList = superSampling(ogRay,k,NUM_OF_RAYS);
         for (Point point:pointList) {
+
             refractedRay = new Ray(gp.point, point.subtract(gp.point));
             refractedPoint = findClosestIntersection(refractedRay);
+
             color = refractedPoint == null ? color
                     : color.add(calcColor(refractedPoint, refractedRay, level - 1, kkX)).scale(kX);
         }

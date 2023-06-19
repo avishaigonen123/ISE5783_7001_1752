@@ -89,7 +89,8 @@ public class GlossyAndBlurryTest {
    public void GlossySphereTest() {
       Scene scene3 = new Scene("squars");
       Camera camera = new Camera(new Point(500, 500, 50), new Vector(-1, -1, 0), new Vector(0, 0, 1))
-              .setVPSize(200, 200).setVPDistance(1000);
+              .setVPSize(250, 250).setVPDistance(1000);
+      camera.transformation(new Vector(200,200,0));
       //camera.transformation(new Vector(0,0,100));
       scene3.setBackground(Color.BLACK);
       Material wall = new Material().setKd(0.3).setKs(0.3).setShininess(60);
@@ -102,7 +103,7 @@ public class GlossyAndBlurryTest {
       Point p6 = new Point(-50, -50, 100);
       Point p10 = new Point(-30, 1, 40), p11 = new Point(-30, 1, 20), p12 = new Point(-10, 1, 20), p13 = new Point(-10, 1, 40);
       Point p14 = new Point(1, -30, 40), p15 = new Point(1, -30, 20), p16 = new Point(1, -10, 20), p17 = new Point(1, -10, 40);
-       Point p18 = new Point(-50,70,0), p19 = new Point(-60,90,0), p20 = new Point(-50,70,80),p21 = new Point(-60,90,80);
+       Point p18 = new Point(20,-30,0), p19 = new Point(60,-100,0), p20 = new Point(20,-30,70),p21 = new Point(60,-100,70);
       scene3.setAmbientLight(new AmbientLight(new Color(WHITE), 0.05));
       scene3.geometries.add(
               //            new Plane(new Point(0,0,0), new Vector(1,0,0)).setEmission(Color.GREEN)
@@ -113,7 +114,6 @@ public class GlossyAndBlurryTest {
 
               , new Polygon(p10, p11, p12, p13).setMaterial(window).setEmission(Color.BLUE.scale(0.4))
               , new Polygon(p14, p15, p16, p17).setMaterial(window).setEmission(Color.BLUE.scale(0.4))
-              , new Polygon(p18,p19,p21,p20).setMaterial(wall).setEmission(Color.BLUE.scale(0.4))
               , new Polygon(new Point(-25, 0, 85), new Point(-25, 0, 55), new Point(-25, -15, 55), new Point(-25, -15, 85)) //
                       .setMaterial(new Material().setKd(0.05).setKs(0.05).setShininess(60)).setEmission(Color.MAROON),
               new Sphere(7d, new Point(-25, 7, 95))
@@ -124,9 +124,12 @@ public class GlossyAndBlurryTest {
                       .setMaterial(new Material().setKd(0.05).setKs(0.05).setShininess(60).setKt(0.9)).setEmission(Color.GRAY.scale(0.9))
               //, new Plane(new Point(400,400,40),new Vector(-1,-1,0)).setMaterial(window.setKb(2).setKt(1))// MIRRRORRRRRR
 //                , new Polygon(p18, p19,p20,p21).setEmission(Color.MAROON.scale(0.8))
-      );
+
+              , new Polygon(p18,p19,p21,p20).setMaterial(new Material().setKd(0.2).setKs(0.4).setKt(0.92).setKr(0.3).setKb(1).setShininess(60)).setEmission(Color.BLUE.scale(0.4))
+          );
       int a = 100;
-      for (int i = -1000;i<1000;i+=a)
+
+     for (int i = -1000;i<1000;i+=a)
          for (int j = -1000;j<1000;j+=a)
             scene3.geometries.add(new Polygon(
                     new Point(i,j,0),
@@ -136,6 +139,7 @@ public class GlossyAndBlurryTest {
       scene3.lights.add(
               new DirectionalLight(sphereLightColor, new Vector(-1,0,-1))
               );
+
       ImageWriter imageWriter = new ImageWriter("GlossySphereTest", 1000, 1000);
       camera.setImageWriter(imageWriter) //
               .setRayTracer(new RayTracerBasic(scene3)) //
