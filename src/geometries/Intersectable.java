@@ -12,6 +12,7 @@ public abstract class Intersectable {
     /**
      * helper class to tell to which geometry the point belongs to
      */
+  //  protected abstract AABox getBox();
     public static class GeoPoint{
         /**
          * the geometry
