@@ -168,8 +168,8 @@ public class Camera {
         checkAreNotEmpty();
         int nY = imageWriter.getNy();
         int nX = imageWriter.getNx();
-        double interval =  0.5;
-        double threadsCount = 4;
+        double interval =  0.005;
+        double threadsCount = 2;
 
         Pixel.initialize(nY, nX, interval);
         while (threadsCount-- > 0) {

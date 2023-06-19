@@ -23,8 +23,9 @@ public class PictureImprover {
         if (area == 0)
             return List.of(pC);
         Random random = new Random();
+        Ray r = new Ray(pC,ray.getDir());
         for (int i = 0; i < numOfRays; i++) {
-            Ray randomRay = new Ray(pC,ray.getDir()).randomOrthogonalRay();
+            Ray randomRay = r.randomOrthogonalRay();
             if(randomRay == null)
                 res.add(pC);
             else {

@@ -25,7 +25,7 @@ public class RayTracerBasic extends RayTracerBase {
     /**
      * that is for the numbers of rays
      */
-    private static final int NUM_OF_RAYS = 10;
+    private static final int NUM_OF_RAYS = 80;
 
     /**
      * constructor that activate the father constructor
@@ -123,7 +123,7 @@ public class RayTracerBasic extends RayTracerBase {
             color = refractedPoint == null ? color
                     : color.add(calcColor(refractedPoint, refractedRay, level - 1, kkX)).scale(kX);
         }
-        return color.scale(1/(double)NUM_OF_RAYS);
+        return color.reduce(NUM_OF_RAYS);
     }
 
     ///
