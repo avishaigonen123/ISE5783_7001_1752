@@ -58,4 +58,12 @@ public class Tube extends RadialGeometry {
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         return null;
     }
+
+    /**
+     * function that returns the boundry box
+     *
+     * @return the boundery box
+     */
+    @Override
+    public AABox getBox() { return null;}
 }

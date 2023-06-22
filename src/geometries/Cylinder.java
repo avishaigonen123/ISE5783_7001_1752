@@ -59,4 +59,11 @@ public class Cylinder extends Tube {
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         return null;
     }
+    /**
+     * function that returns the boundry box
+     *
+     * @return the boundery box
+     */
+    @Override
+    public AABox getBox() { return null;}
 }

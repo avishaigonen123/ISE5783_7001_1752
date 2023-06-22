@@ -71,5 +71,16 @@ public class Plane extends Geometry {
         double t = (normal.dotProduct(p0.subtract(ray.getP0())))/(normal.dotProduct(ray.getDir())); // calculate t
         return (t<0||Util.isZero(t))?null:List.of(new GeoPoint(this,ray.getPoint(t))); // if t<=0. return null. other ways, use the func getPoint(t) and return the desire point
     }
-
+    /**
+     * function that returns the boundry box
+     *
+     * @return the boundery box
+     */
+    @Override
+    public AABox getBox() {
+        int size = 1000;
+        Point p1 = new Point(p0.getX()+size,p0.getY()+size,p0.getZ()+size);
+        Point p2 = new Point(p0.getX()-size,p0.getY()-size,p0.getZ()-size);
+        return new AABox(p1,p2);
+    }
 }

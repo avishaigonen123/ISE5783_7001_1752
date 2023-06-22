@@ -1,5 +1,7 @@
 package geometries;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 import static primitives.Util.isZero;
 
 import java.util.ArrayList;
@@ -111,5 +113,23 @@ public class Polygon extends Geometry {
       }
       list.get(0).geometry = this;
       return list; // after all, we will return the list
+   }
+   /**
+    * function that returns the boundry box
+    *
+    * @return the boundery box
+    */
+   @Override
+   public AABox getBox() {
+      double x_max = Double.NEGATIVE_INFINITY, y_max = Double.NEGATIVE_INFINITY, z_max = Double.NEGATIVE_INFINITY, x_min = Double.POSITIVE_INFINITY, y_min = Double.POSITIVE_INFINITY, z_min = Double.POSITIVE_INFINITY;
+      for (Point point : vertices) {
+         x_max = max(point.getX(),x_max);
+         y_max = max(point.getY(),y_max);
+         z_max = max(point.getZ(),z_max);
+         x_min = min(point.getX(),x_min);
+         y_min = min(point.getY(),y_min);
+         z_min = min(point.getZ(),z_min);
+      }
+      return new AABox(new Point(x_max, y_max, z_max), new Point(x_min, y_min, z_min));
    }
 }

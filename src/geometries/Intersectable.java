@@ -12,8 +12,7 @@ public abstract class Intersectable {
     /**
      * helper class to tell to which geometry the point belongs to
      */
-  //  protected abstract AABox getBox();
-    public static class GeoPoint{
+    public static class GeoPoint {
         /**
          * the geometry
          */
@@ -25,13 +24,15 @@ public abstract class Intersectable {
 
         /**
          * constructor for geopoint class
+         *
          * @param _geo the geometry
-         * @param _p the point
+         * @param _p   the point
          */
-        public GeoPoint(Geometry _geo,Point _p){
+        public GeoPoint(Geometry _geo, Point _p) {
             geometry = _geo;
             point = _p;
         }
+
         @Override
         public boolean equals(Object obj) {
             if (this == obj) return true;
@@ -39,11 +40,16 @@ public abstract class Intersectable {
                 return this.point.equals(other.point) && this.geometry.equals(other.geometry);
             return false;
         }
+
         @Override
-        public String toString() { return "geometry: " + geometry.toString() + " point: " + point.toString();}
+        public String toString() {
+            return "geometry: " + geometry.toString() + " point: " + point.toString();
+        }
     }
+
     /**
      * function that returns list of intersections with the geometry and the given ray
+     *
      * @param ray the ray we want to intersect with
      * @return the list of the intersections
      */
@@ -51,22 +57,27 @@ public abstract class Intersectable {
         var geoList = findGeoIntersections(ray);
         return geoList == null ? null : geoList.stream().map(gp -> gp.point).toList();
     }
+
     /**
      * function that returns list of intersections with the geometry and the given ray in geopoint
+     *
      * @param ray the ray we want to intersect with
      * @return the list of the intersections in geopoint
      */
-    public List<GeoPoint> findGeoIntersections(Ray ray){
-        return findGeoIntersectionsHelper(ray);
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
+        if (this.getBox().findGeoIntersectionsHelper(ray) != null)
+            return findGeoIntersectionsHelper(ray);
+        return null;
     }
+
     /**
      * Helper func to be implemented by son
+     *
      * @param ray the ray we want to intersect with
      * @return the list of the intersections in geopoint
      */
     protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
 
-
-
+    public abstract AABox getBox();
 
 }

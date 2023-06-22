@@ -15,6 +15,8 @@ import static primitives.Util.isZero;
  * Class that presents our camera
  */
 public class Camera {
+    private int numOfThreads = 3;
+    private double interval = 0.5;
     private Point p0;
     private Vector vUp;
     private Vector vTo;
@@ -83,7 +85,24 @@ public class Camera {
         rayTracer = _rayTracer;
         return this;
     }
-
+    /**
+     * setter for numOfThread
+     * @param _numOfThread the numOfThread
+     * @return the camera
+     */
+    public Camera setMultithreading(int _numOfThread){
+        numOfThreads = _numOfThread;
+        return this;
+    }
+    /**
+     * setter for interval
+     * @param _interval the interval
+     * @return the camera
+     */
+    public Camera setDebugPrint(double _interval){
+        interval = _interval;
+        return this;
+    }
     /**
      * getter for distance
      * @return distance
@@ -168,8 +187,7 @@ public class Camera {
         checkAreNotEmpty();
         int nY = imageWriter.getNy();
         int nX = imageWriter.getNx();
-        double interval =  0.005;
-        double threadsCount = 2;
+        double threadsCount = numOfThreads;
 
         Pixel.initialize(nY, nX, interval);
         while (threadsCount-- > 0) {

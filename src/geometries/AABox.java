@@ -6,6 +6,7 @@ import primitives.Ray;
 import java.util.LinkedList;
 import java.util.List;
 
+;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
@@ -16,45 +17,49 @@ public class AABox extends Intersectable {
     /**
      * one of the corner points of the Axes Aliened Box
      */
-    private Point A;
+    private Point max;
     /**
      * the opposite Point to Point A of the Axes Aliened Box
      */
-    private Point B;
+    private Point min;
 
-    public AABox(Point a, Point b) {
-        A = a;
-        B = b;
+    public AABox(Point _max, Point _min) {
+        max = (_max.getX() >= _min.getX() && _max.getY() >= _min.getY() && _max.getZ() >= _min.getZ()) ? _max : _min;
+        min = max.equals(_max) ? _min : _max;
     }
 
-    public Point getA() {
-        return A;
+    public Point getMax() {
+        return max;
     }
 
-    public Point getB() {
-        return B;
+    public Point getMin() {
+        return min;
     }
 
     @Override
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        double tx1 = (A.getX() - ray.getP0().getX())/ray.getDir().getX();
-        double tx2 = (B.getX() - ray.getP0().getX())/ray.getDir().getX();
 
-        double tmin = min(tx1, tx2);
-        double tmax = max(tx1, tx2);
+        double t1 = (min.getX() - ray.getP0().getX()) / ray.getDir().getX();
+        double t2 = (max.getX() - ray.getP0().getX()) / ray.getDir().getX();
+        double t3 = (min.getY() - ray.getP0().getY()) / ray.getDir().getY();
+        double t4 = (max.getY() - ray.getP0().getY()) / ray.getDir().getY();
+        double t5 = (min.getZ() - ray.getP0().getZ()) / ray.getDir().getZ();
+        double t6 = (max.getZ() - ray.getP0().getZ()) / ray.getDir().getZ();
 
-        double ty1 = (A.getY() - ray.getP0().getY())/ray.getDir().getY();
-        double ty2 = (B.getY() - ray.getP0().getY())/ray.getDir().getY();
+        double tmin = Math.max(Math.max(Math.min(t1, t2), Math.min(t3, t4)), Math.min(t5, t6));
+        double tmax = Math.min(Math.min(Math.max(t1, t2), Math.max(t3, t4)), Math.max(t5, t6));
 
-        tmin = max(tmin ,min(ty1, ty2));
-        tmax = min(tmax,max(ty1, ty2));
 
-        double tz1 = (A.getZ() - ray.getP0().getZ())/ray.getDir().getZ();
-        double tz2 = (B.getZ() - ray.getP0().getZ())/ray.getDir().getZ();
+        return tmax >= tmin && tmax >= 0 ? new LinkedList<>() : null;
+    }
 
-        tmin = max(tmin ,min(tz1, tz2));
-        tmax = min(tmax,max(tz1, tz2));
-
-        return tmax >= tmin? new LinkedList<>():null;
+    /**
+     * function that returns the boundry box
+     *
+     * @return the boundery box
+     */
+    @Override
+    public AABox getBox() {
+        return this;
     }
 }
