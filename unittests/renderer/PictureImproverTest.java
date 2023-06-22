@@ -8,6 +8,7 @@ import primitives.Vector;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static renderer.PictureImprover.DISTANCE;
 
 class PictureImproverTest {
     @Test
@@ -19,12 +20,12 @@ class PictureImproverTest {
         List<Point> lst = PictureImprover.superSampling(ray,5,200);
         // TC01: t>0
         for (Point point:lst) {
-            assertTrue(point.distance(ray.getPoint(5))<=5,"TC01:distance is "+point.distance(p));
+            assertTrue(point.distance(ray.getPoint(DISTANCE))<=DISTANCE,"TC01:distance is "+point.distance(p));
         }
         // =============== Boundary Values Tests ==================
         // TC11: t=0
         lst = PictureImprover.superSampling(ray,0,200);
         assertEquals(1,lst.size(),"TC11: size is not 1");
-        assertEquals(ray.getPoint(5),lst.get(0),"TC11: its not the p we hoped for");
+        assertEquals(ray.getPoint(DISTANCE),lst.get(0),"TC11: its not the p we hoped for");
     }
 }

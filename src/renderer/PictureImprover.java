@@ -15,7 +15,7 @@ public class PictureImprover {
     /**
      * that is for the distance from the target plane to the point
      */
-    private static final double DISTANCE = 100;
+    static final double DISTANCE = 100;
 
     static List<Point> superSampling(Ray ray, double area, int numOfRays) {
         LinkedList<Point> res = new LinkedList<>();

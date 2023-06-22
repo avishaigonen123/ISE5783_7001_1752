@@ -189,14 +189,15 @@ public class GlossyAndBlurryTest {
               , new Polygon(p18,p19,p21,p20).setMaterial(new Material().setKd(0.2).setKs(0.4).setKt(0.92).setKr(0.3).setKb(1).setShininess(60)).setEmission(Color.BLUE.scale(0.4))
       );
       int a = 100;
-
+      Geometries floor = new Geometries();
       for (int i = -1000;i<1000;i+=a)
          for (int j = -1000;j<1000;j+=a)
-            scene3.geometries.add(new Polygon(
+            floor.add(new Polygon(
                     new Point(i,j,0),
                     new Point(i,j+a,0),
                     new Point(i+a,j+a,0),
                     new Point(i+a,j,0)).setEmission((i/a+j/a)%2==0?Color.GRAY:Color.BLACK).setMaterial(tile));
+      scene3.geometries.add(floor);
       scene3.lights.add(
               new DirectionalLight(sphereLightColor, new Vector(-1,0,-1))
       );

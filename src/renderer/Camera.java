@@ -15,8 +15,8 @@ import static primitives.Util.isZero;
  * Class that presents our camera
  */
 public class Camera {
-    private int numOfThreads = 3;
-    private double interval = 0.5;
+    private int numOfThreads = 2;
+    private double interval = 0.05;
     private Point p0;
     private Vector vUp;
     private Vector vTo;
@@ -192,17 +192,14 @@ public class Camera {
         Pixel.initialize(nY, nX, interval);
         while (threadsCount-- > 0) {
             new Thread(() -> {
-                for (Pixel pixel = new Pixel(); pixel.nextPixel(); Pixel.pixelDone())
-                    imageWriter.writePixel(pixel.col,pixel.row,castRay(pixel.col,pixel.row));
+                for (Pixel pixel = new Pixel(); pixel.nextPixel(); Pixel.pixelDone()){
+                    castRay(pixel.col, pixel.row);
+                    Pixel.pixelDone();
+                    Pixel.printPixel();
+                }
             }).start();
         }
         Pixel.waitToFinish();
-/*
-        for(int i=0;i<nY;i++)
-            for(int j=0;j<nX;j++){
-                imageWriter.writePixel(j,i,castRay(j,i));
-            }
-            */
         return this;
     }
     private Color castRay(int j,int i){
