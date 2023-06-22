@@ -12,19 +12,19 @@ package renderer;
 class Pixel {
     private static int maxRows = 0;
     private static int maxCols = 0;
-    private static long totalPixels = 0l;
+    private static long totalPixels = 0L;
 
     private static volatile int cRow = 0;
     private static volatile int cCol = -1;
-    private static volatile long pixels = 0l;
-    private static volatile long last = -1l;
+    private static volatile long pixels = 0L;
+    private static volatile long last = -1L;
     private static volatile int lastPrinted = -1;
 
     private static boolean print = false;
-    private static long printInterval = 100l;
-    private static final String PRINT_FORMAT = "%5.1f%%\r";
-    private static Object mutexNext = new Object();
-    private static Object mutexPixels = new Object();
+    private static long printInterval = 100L;
+    private static final String PRINT_FORMAT = "%5.1f%%\n";
+    private static final Object mutexNext = new Object();
+    private static final Object mutexPixels = new Object();
 
     int row;
     int col;
@@ -99,7 +99,7 @@ class Pixel {
                 Thread.sleep(printInterval);
             } catch (InterruptedException ignore) {
                 if (print)
-                    System.out.print("");
+                    System.out.println();
             }
         }
         if (print)
@@ -112,10 +112,11 @@ class Pixel {
     public static void printPixel() {
         long current = pixels;
         if (print && last != current) {
-            int percentage = (int) (1000l * current / totalPixels);
+            int percentage = (int) (1000L * current / totalPixels);
             if (lastPrinted != percentage) {
                 last = current;
                 lastPrinted = percentage;
+                System.out.print("\033[H\033[2J");
                 System.out.printf(PRINT_FORMAT, percentage / 10d);
             }
         }

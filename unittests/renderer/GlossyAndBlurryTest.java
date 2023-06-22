@@ -103,7 +103,7 @@ public class GlossyAndBlurryTest {
       Point p6 = new Point(-50, -50, 100);
       Point p10 = new Point(-30, 1, 40), p11 = new Point(-30, 1, 20), p12 = new Point(-10, 1, 20), p13 = new Point(-10, 1, 40);
       Point p14 = new Point(1, -30, 40), p15 = new Point(1, -30, 20), p16 = new Point(1, -10, 20), p17 = new Point(1, -10, 40);
-       Point p18 = new Point(20,-30,0), p19 = new Point(60,-100,0), p20 = new Point(20,-30,70),p21 = new Point(60,-100,70);
+      Point p18 = new Point(20,-30,0), p19 = new Point(60,-100,0), p20 = new Point(20,-30,70),p21 = new Point(60,-100,70);
       scene3.setAmbientLight(new AmbientLight(new Color(WHITE), 0.05));
       scene3.geometries.add(
               //            new Plane(new Point(0,0,0), new Vector(1,0,0)).setEmission(Color.GREEN)
@@ -168,7 +168,7 @@ public class GlossyAndBlurryTest {
       scene3.setAmbientLight(new AmbientLight(new Color(WHITE), 0.05));
       scene3.geometries.add(
               //            new Plane(new Point(0,0,0), new Vector(1,0,0)).setEmission(Color.GREEN)
-              new Geometries(new Geometries( new Polygon(p0, p1, p4, p3).setMaterial(wall).setEmission(Color.GRAY)
+              new Geometries( new Polygon(p0, p1, p4, p3).setMaterial(wall).setEmission(Color.GRAY)
                       , new Polygon(p0, p2, p5, p3).setMaterial(wall).setEmission(Color.GRAY)
                       , new Triangle(p3, p4, p6).setMaterial(wall).setEmission(Color.RED)
                       , new Triangle(p3, p5, p6).setMaterial(wall).setEmission(Color.RED)
@@ -182,7 +182,7 @@ public class GlossyAndBlurryTest {
                               new Sphere(5d, new Point(-25, -7, 108))
                                       .setMaterial(new Material().setKd(0.05).setKs(0.05).setShininess(60).setKt(0.8)).setEmission(Color.GRAY.scale(0.8)),
                               new Sphere(3d, new Point(-25, 5, 115))
-                                      .setMaterial(new Material().setKd(0.05).setKs(0.05).setShininess(60).setKt(0.9)).setEmission(Color.GRAY.scale(0.9))))
+                                      .setMaterial(new Material().setKd(0.05).setKs(0.05).setShininess(60).setKt(0.9)).setEmission(Color.GRAY.scale(0.9)))
               //, new Plane(new Point(400,400,40),new Vector(-1,-1,0)).setMaterial(window.setKb(2).setKt(1))// MIRRRORRRRRR
 //                , new Polygon(p18, p19,p20,p21).setEmission(Color.MAROON.scale(0.8))
 

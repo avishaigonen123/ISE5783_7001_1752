@@ -65,7 +65,7 @@ public abstract class Intersectable {
      * @return the list of the intersections in geopoint
      */
     public List<GeoPoint> findGeoIntersections(Ray ray) {
-        if (this.getBox().findGeoIntersectionsHelper(ray) != null)
+        if (/*true*/this.getBox().findGeoIntersectionsHelper(ray) != null)
             return findGeoIntersectionsHelper(ray);
         return null;
     }
