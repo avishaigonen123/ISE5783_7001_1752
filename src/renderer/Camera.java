@@ -5,6 +5,7 @@ import primitives.Point;
 import primitives.Vector;
 import primitives.Ray;
 
+import java.util.LinkedList;
 import java.util.MissingResourceException;
 
 import static java.lang.Math.*;
@@ -15,8 +16,17 @@ import static primitives.Util.isZero;
  * Class that presents our camera
  */
 public class Camera {
-    private int numOfThreads = 4;
+    private int numOfThreads = 0;
     private double interval = 0.005;
+
+    /** Pixel manager for supporting:
+     * <ul>
+     * <li>multi-threading</li>
+     * <li>debug print of progress percentage in Console window/tab</li>
+     * <ul>
+     */
+    private PixelManager pixelManager;
+
     private Point p0;
     private Vector vUp;
     private Vector vTo;
@@ -187,24 +197,38 @@ public class Camera {
         checkAreNotEmpty();
         int nY = imageWriter.getNy();
         int nX = imageWriter.getNx();
-        double threadsCount = numOfThreads;
-
-        Pixel.initialize(nY, nX, interval);
-        while (threadsCount-- > 0) {
-            new Thread(() -> {
-                for (Pixel pixel = new Pixel(); pixel.nextPixel(); Pixel.pixelDone()){
-                    imageWriter.writePixel(pixel.col,pixel.row,castRay(pixel.col,pixel.row));
-                }
-            }).start();
+        pixelManager = new PixelManager(nY, nX, interval);
+        if (numOfThreads == 0)
+            for (int i = 0; i < nY; ++i)
+                for (int j = 0; j < nX; ++j)
+                    castRay(nX, nY, j, i);
+        else {
+            double threadsCount = numOfThreads;
+            var threads = new LinkedList<Thread>(); // list of threads
+            while (threadsCount-- > 0) // add appropriate number of threads
+                threads.add(new Thread(() -> { // add a thread with its code
+                    PixelManager.Pixel pixel; // current pixel(row,col)
+                    // allocate pixel(row,col) in loop until there are no more pixels
+                    while ((pixel = pixelManager.nextPixel()) != null)
+                        // cast ray through pixel (and color it – inside castRay)
+                        castRay(nX, nY, pixel.col(), pixel.row());
+                }));
+            // start all the threads
+            for (var thread : threads) thread.start();
+            // wait until all the threads have finished
+            try { for (var thread : threads) thread.join(); } catch (InterruptedException ignore) {}
         }
-        Pixel.waitToFinish();
-/*
-        for(int i=0;i<nY;i++)
-            for(int j=0;j<nX;j++){
-                imageWriter.writePixel(j,i,castRay(j,i));
-            }
-            */
         return this;
+    }
+    /** Cast ray from camera and color a pixel
+     * @param nX resolution on X axis (number of pixels in row)
+     * @param nY resolution on Y axis (number of pixels in column)
+     * @param col pixel's column number (pixel index in row)
+     * @param row pixel's row number (pixel index in column)
+     */
+    private void castRay(int nX, int nY, int col, int row) {
+        imageWriter.writePixel(col, row, rayTracer.traceRay(constructRay(nX, nY, col, row)));
+        pixelManager.pixelDone();
     }
     private Color castRay(int j,int i){
         Ray ray = constructRay(imageWriter.getNx(),imageWriter.getNy(),j,i);

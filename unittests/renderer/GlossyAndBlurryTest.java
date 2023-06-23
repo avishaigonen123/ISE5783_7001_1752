@@ -90,6 +90,7 @@ public class GlossyAndBlurryTest {
       Scene scene3 = new Scene("squars");
       Camera camera = new Camera(new Point(500, 500, 50), new Vector(-1, -1, 0), new Vector(0, 0, 1))
               .setVPSize(250, 250).setVPDistance(1000);
+      camera.setMultithreading(3).setDebugPrint(0.1);
       camera.transformation(new Vector(200,200,0));
       //camera.transformation(new Vector(0,0,100));
       scene3.setBackground(Color.BLACK);
@@ -151,6 +152,7 @@ public class GlossyAndBlurryTest {
       Scene scene3 = new Scene("squars");
       Camera camera = new Camera(new Point(500, 500, 50), new Vector(-1, -1, 0), new Vector(0, 0, 1))
               .setVPSize(250, 250).setVPDistance(1000);
+      camera.setMultithreading(3).setDebugPrint(0.1);
       camera.transformation(new Vector(200,200,0));
       //camera.transformation(new Vector(0,0,100));
       scene3.setBackground(Color.BLACK);
@@ -202,7 +204,7 @@ public class GlossyAndBlurryTest {
               new DirectionalLight(sphereLightColor, new Vector(-1,0,-1))
       );
 
-      ImageWriter imageWriter = new ImageWriter("GlossySphereTest", 1000, 1000);
+      ImageWriter imageWriter = new ImageWriter("GlossySphereTestWithComposite", 1000, 1000);
       camera.setImageWriter(imageWriter) //
               .setRayTracer(new RayTracerBasic(scene3)) //
               .renderImage() //
