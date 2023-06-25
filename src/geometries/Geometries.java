@@ -14,8 +14,7 @@ import static java.lang.Math.min;
  * class the implements the composite design pattern
  */
 public class Geometries extends Intersectable {
-    private List<Intersectable> geometriesList;
-
+    private final List<Intersectable> geometriesList;
     /**
      * default public constructor for Geomertries
      */
@@ -56,12 +55,12 @@ public class Geometries extends Intersectable {
     }
 
     /**
-     * function that returns the boundry box
+     * function that returns the boundary box for geometries this enables BVH
      *
-     * @return the boundery box
+     * @return the boundary box
      */
     @Override
-    public AABox getBox() {
+    public AABox getBoxHelper() {
         double x_min = Double.POSITIVE_INFINITY;
         double y_min = Double.POSITIVE_INFINITY;
         double z_min = Double.POSITIVE_INFINITY;

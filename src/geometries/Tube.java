@@ -65,5 +65,5 @@ public class Tube extends RadialGeometry {
      * @return the boundery box
      */
     @Override
-    public AABox getBox() { return null;}
+    public AABox getBoxHelper() { return null;}
 }

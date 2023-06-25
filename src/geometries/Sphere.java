@@ -84,7 +84,7 @@ public class Sphere extends RadialGeometry {
      * @return the boundery box
      */
     @Override
-    public AABox getBox() {
+    public AABox getBoxHelper() {
         Point p1 = new Point(center.getX()+radius,center.getY()+radius,center.getZ()+radius);
         Point p2 = new Point(center.getX()-radius,center.getY()-radius,center.getZ()-radius);
         return new AABox(p1,p2);

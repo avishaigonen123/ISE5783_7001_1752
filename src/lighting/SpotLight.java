@@ -11,7 +11,7 @@ import static java.lang.Math.pow;
  * class for SpotLight
  */
 public class SpotLight extends PointLight {
-    private Vector direction;
+    private final Vector direction;
     private double nRestriction = 1;
 
     /**

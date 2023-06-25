@@ -33,7 +33,7 @@ public class TeapotTest {
     private static final Color color = new Color(200, 0, 0);
     private static final Material mat = new Material().setKd(0.5).setKs(0.5).setShininess(60);
 
-    private static Point[] pnts = new Point[] { null, //
+    private static final Point[] pnts = new Point[] { null, //
             new Point(40.6266, 28.3457, -1.10804), //
             new Point(40.0714, 30.4443, -1.10804), //
             new Point(40.7155, 31.1438, -1.10804), //

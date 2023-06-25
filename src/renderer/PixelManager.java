@@ -17,29 +17,29 @@ class PixelManager {
     /** Maximum columns of pixels */
     private int                 maxCols       = 0;
     /** Total amount of pixels in the generated image */
-    private long                totalPixels   = 0l;
+    private long                totalPixels   = 0L;
 
     /** Currently processed row of pixels */
     private volatile int        cRow          = 0;
     /** Currently processed column of pixels */
     private volatile int        cCol          = -1;
     /** Amount of pixels that have been processed */
-    private volatile long       pixels        = 0l;
+    private volatile long       pixels        = 0L;
     /** Last printed progress update percentage */
     private volatile int        lastPrinted   = 0;
 
     /** Flag of debug printing of progress percentage */
     private boolean             print         = false;
     /** Progress percentage printing interval */
-    private long                printInterval = 100l;
+    private long                printInterval = 100L;
     /** Printing format */
     private static final String PRINT_FORMAT  = "%5.1f%%\n";
     /** Mutual exclusion object for synchronizing next pixel allocation between
      * threads */
-    private Object              mutexNext     = new Object();
+    private final Object              mutexNext     = new Object();
     /** Mutual exclusion object for printing progress percentage in console window
      * by different threads */
-    private Object              mutexPixels   = new Object();
+    private final Object              mutexPixels   = new Object();
 
     /** Initialize pixel manager data for multi-threading
      * @param maxRows  the amount of pixel rows
@@ -82,7 +82,7 @@ class PixelManager {
         synchronized (mutexPixels) {
             ++pixels;
             if (print) {
-                percentage = (int) (1000l * pixels / totalPixels);
+                percentage = (int) (1000L * pixels / totalPixels);
                 if (percentage - lastPrinted >= printInterval) {
                     lastPrinted = percentage;
                     flag        = true;

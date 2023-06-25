@@ -77,7 +77,7 @@ public class Plane extends Geometry {
      * @return the boundery box
      */
     @Override
-    public AABox getBox() {
+    public AABox getBoxHelper() {
         int size = 1000;
         Point p1 = new Point(p0.getX()+size,p0.getY()+size,p0.getZ()+size);
         Point p2 = new Point(p0.getX()-size,p0.getY()-size,p0.getZ()-size);

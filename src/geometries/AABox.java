@@ -16,11 +16,11 @@ public class AABox extends Intersectable {
     /**
      * one of the corner points of the Axes Aliened Box
      */
-    private Point max;
+    private final Point max;
     /**
      * the opposite Point to Point A of the Axes Aliened Box
      */
-    private Point min;
+    private final Point min;
 
     public AABox(Point _max, Point _min) {
         max = (_max.getX() >= _min.getX() && _max.getY() >= _min.getY() && _max.getZ() >= _min.getZ()) ? _max : _min;
@@ -58,7 +58,7 @@ public class AABox extends Intersectable {
      * @return the boundery box
      */
     @Override
-    public AABox getBox() {
+    public AABox getBoxHelper() {
         return this;
     }
 }

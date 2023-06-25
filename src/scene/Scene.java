@@ -15,8 +15,8 @@ public class Scene {
     public String name;
     public Color background = Color.BLACK;
     public AmbientLight ambientLight = AmbientLight.NONE;
-    public Geometries geometries = new Geometries();
-    public List<LightSource> lights = new LinkedList<LightSource>();
+    public Geometries geometries;
+    public List<LightSource> lights = new LinkedList<>();
     /**
      * constructor for Scene
      * @param _name the name of the scene
@@ -70,4 +70,5 @@ public class Scene {
         lights=_lights;
         return this;
     }
+
 }

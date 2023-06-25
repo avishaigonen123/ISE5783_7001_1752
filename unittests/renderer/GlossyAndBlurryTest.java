@@ -67,7 +67,7 @@ public class GlossyAndBlurryTest {
            .setMaterial(material);
    private final Geometry       triangle2               = new Triangle(vertices[0], vertices[1], vertices[3])
            .setMaterial(material);
-   private Scene scene = new Scene("Test scene");
+   private final Scene scene = new Scene("Test scene");
 
    /** test for multiple light sources with sphere */
    @Test

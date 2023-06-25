@@ -8,7 +8,7 @@ import primitives.Vector;
  * class for PointLight
  */
 public class PointLight extends Light implements LightSource {
-    private Point position;
+    private final Point position;
     private double kC=1, kL=0, kQ=0;
 
     /**

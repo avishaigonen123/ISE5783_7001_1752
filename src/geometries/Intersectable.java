@@ -9,6 +9,7 @@ import java.util.List;
  * interface that implements all the geometries that can be intersected
  */
 public abstract class Intersectable {
+    private AABox AABB = null;
     /**
      * helper class to tell to which geometry the point belongs to
      */
@@ -65,9 +66,19 @@ public abstract class Intersectable {
      * @return the list of the intersections in geopoint
      */
     public List<GeoPoint> findGeoIntersections(Ray ray) {
-        if (true/*this.getBox().findGeoIntersectionsHelper(ray) != null*/)
+        //if (this.getBox() == null || this.getBox().findGeoIntersectionsHelper(ray) != null)
             return findGeoIntersectionsHelper(ray);
-        return null;
+        //return null;
+    }
+
+    /**
+     * a kind of NVI pattern for getting the box and not calculating it twice
+     * @return the axes aligned bounding box of the Intersectable
+     */
+    public AABox getBox(){
+        if(AABB == null)
+            AABB = getBoxHelper();
+        return AABB;
     }
 
     /**
@@ -78,6 +89,11 @@ public abstract class Intersectable {
      */
     protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
 
-    public abstract AABox getBox();
+    /**
+     * Helper func to be implemented by son for building the AABB
+     * @return the Box
+     */
+    protected abstract AABox getBoxHelper();
+
 
 }

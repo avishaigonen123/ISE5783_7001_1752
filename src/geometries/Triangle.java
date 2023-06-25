@@ -60,7 +60,7 @@ public class Triangle extends Polygon {
      * @return the boundery box
      */
     @Override
-    public AABox getBox() {
+    public AABox getBoxHelper() {
         double x_max = Double.NEGATIVE_INFINITY, y_max = Double.NEGATIVE_INFINITY, z_max = Double.NEGATIVE_INFINITY, x_min = Double.POSITIVE_INFINITY, y_min = Double.POSITIVE_INFINITY, z_min = Double.POSITIVE_INFINITY;
         for (Point point : vertices) {
             x_max = max(point.getX(),x_max);
